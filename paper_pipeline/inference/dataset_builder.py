@@ -157,6 +157,7 @@ def build(
         }
 
         json_obj = json_index.get(stem)
+        row_matched = False
         if json_obj is None:
             no_json.append(fname)
         else:
@@ -166,11 +167,12 @@ def build(
                 row["visualization_subtype"]   = panel_data.get("visualization_subtype", "")
                 row["subcaption"]              = panel_data.get("subcaption", "")
                 row["summary"]                 = panel_data.get("summary", "")
+                row_matched=True
                 matched.append(fname)
             else:
                 panel_not_found.append(fname)
 
-        rows.append(row)
+        rows.append((row, row_matched))
 
     # Write CSV
     output_csv.parent.mkdir(parents=True, exist_ok=True)
@@ -186,7 +188,7 @@ def build(
     n_no_panel    = len(panel_not_found)
     n_skipped     = len(skipped_pattern)
     n_has_caption = sum(
-        1 for r in rows if r["matched"] and r["subcaption"] and r["summary"]
+        1 for r, flag in rows if flag and r["subcaption"] and r["summary"]
     )
 
     def pct(n): return n / total_rows * 100 if total_rows else 0
