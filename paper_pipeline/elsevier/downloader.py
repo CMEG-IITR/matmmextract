@@ -8,9 +8,9 @@ import pandas as pd
 from paper_pipeline.shared.downloader import run_downloads
 
 
-DEFAULT_CSV = "alloy_elsevier_img_details.csv"
-DEFAULT_OUTPUT_DIR = "alloy_elsevier_contents"
-DEFAULT_OUTPUT_CSV = "alloy_elsevier_figures_with_images.csv"
+DEFAULT_CSV = "elsevier_img_details.csv"
+DEFAULT_OUTPUT_DIR = "elsevier_contents"
+DEFAULT_OUTPUT_CSV = "elsevier_figures_with_images.csv"
 DEFAULT_LOG_FILE = "download_log_elsevier.csv"
 DEFAULT_NAME_PREFIX = "img"
 DEFAULT_MAX_WORKERS = 4
