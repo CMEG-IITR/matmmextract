@@ -8,36 +8,22 @@ version = "0.1.0"
 description = "Scientific paper acquisition, extraction, preprocessing, detection and captioning pipeline"
 readme = "README.md"
 requires-python = ">=3.10"
-license = {text = "MIT"}
-
-authors = [
-    {name = "NAN"}
-]
-
-keywords = [
-    "scientific-papers",
-    "openalex",
-    "elsevier",
-    "springer",
-    "computer-vision",
-    "dataset-generation"
-]
-
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-]
+license = "MIT"
 
 dependencies = [
-    "requests",
-    "pandas",
-    "beautifulsoup4",
-    "lxml",
+    "pandas>=3.0",
+    "requests>=2.34",
+    "beautifulsoup4>=4.14",
+    "lxml>=6.1",
+    "torch>=2.12",
+    "torchvision>=0.27",
+    "ultralytics>=8.4",
+    "Pillow>=12.2",
+    "tqdm>=4.68",
+    "transformers>=5.10",
+    "google-genai>=2.8",
+    "openai>=2.41",
+    "numpy>=2.4",
 ]
 
 [project.optional-dependencies]
@@ -51,7 +37,4 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
-
-[tool.setuptools.package-data]
-"paper_pipeline" = ["py.typed"]
 
