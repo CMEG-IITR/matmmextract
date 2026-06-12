@@ -20,8 +20,7 @@ Cleaner
 
 .. code-block:: python
 
-   from paper_pipeline.inference import cleaner
+   from multimat.inference import cleaner
 
    cleaner.clean(dry_run=True)
    # cleaner.clean()
-

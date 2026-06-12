@@ -1,5 +1,5 @@
 Extract Figures
 ===============
 
-.. automodule:: paper_pipeline.springer.extractor
+.. automodule:: multimat.springer.extractor
    :members:

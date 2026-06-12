@@ -1,22 +1,22 @@
-from paper_pipeline.preprocess.pipeline import load_csvs
-from paper_pipeline.inference.detector import detect
-from paper_pipeline.inference.cropper import crop
-from paper_pipeline.inference.crop_csv_builder import build_crop_csv
-from paper_pipeline.inference.captioner_azure import captioner as azure_caption
-from paper_pipeline.inference.dataset_builder import build
-from paper_pipeline.openalex.fetcher import fetch_elsevier
-from paper_pipeline.elsevier.extractor import extract_all as elsevier_extract
-from paper_pipeline.elsevier.downloader import download_all as elsevier_download
-from paper_pipeline.elsevier.fetcher import fetch_all as elsevier_fetch
+from multimat.preprocess.pipeline import load_csvs
+from multimat.inference.detector import detect
+from multimat.inference.cropper import crop
+from multimat.inference.crop_csv_builder import build_crop_csv
+from multimat.inference.captioner_azure import captioner as azure_caption
+from multimat.inference.dataset_builder import build
+from multimat.openalex.fetcher import fetch_elsevier
+from multimat.elsevier.extractor import extract_all as elsevier_extract
+from multimat.elsevier.downloader import download_all as elsevier_download
+from multimat.elsevier.fetcher import fetch_all as elsevier_fetch
 
 
 elsevier_result = fetch_elsevier(
     license_="cc-by",
-    keywords=["titanium alloy", "microstructure"],
+    keywords=["titanium"],
     from_year=2020, to_year=2024,
-    max_results=4,
+    max_results=1,
     output_csv="output/elsevier_papers.csv",
-    email="mohammad_i@mfs.iitr.ac.in",   # optional, gets faster rate limit
+    api_key="",   # optional, gets faster rate limit
 )
 
 elsevier_df = load_csvs(["output/elsevier_papers.csv"])
@@ -45,7 +45,7 @@ elsevier_download(
 detect(
     image_dir="images/elsevier",
     output_dir="inference_results",
-    checkpoint="models/best.pt",
+    checkpoint="best.pt",
     conf=0.6, iou=0.4, imgsz=1024,
 )
 
@@ -81,3 +81,4 @@ build(
     json_dir="subcaptions",
     output_csv="elsevier_linked_dataset.csv",
 )
+

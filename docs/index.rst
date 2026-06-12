@@ -1,5 +1,5 @@
-Paper Pipeline
-==============
+MultiMat
+========
 
 Scientific paper acquisition, extraction, preprocessing,
 dataset creation, detection and caption generation.

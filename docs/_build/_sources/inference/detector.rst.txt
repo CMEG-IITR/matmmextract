@@ -1,5 +1,5 @@
 Detector
 ========
 
-.. automodule:: paper_pipeline.inference.detector
+.. automodule:: multimat.inference.detector
    :members:

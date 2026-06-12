@@ -1,0 +1,672 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>multimat.inference.captioner &mdash; MultiMat</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            MultiMat
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../getting_started.html#build-docs">Build docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#elsevier-pipeline">Elsevier Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#springer-pipeline">Springer Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples.html#cleaner">Cleaner</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../openalex/fetch.html">Fetch Papers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../openalex/fetch.html#multimat-openalex-fetcher">multimat.openalex.fetcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../openalex/fetch.html#why-openalex-instead-of-scopus-csvs">Why OpenAlex instead of Scopus CSVs?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../openalex/fetch.html#key-filters-supported">Key filters supported</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../openalex/fetch.html#multimat.openalex.fetcher.FetchResult"><code class="docutils literal notranslate"><span class="pre">FetchResult</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../openalex/fetch.html#multimat.openalex.fetcher.fetch"><code class="docutils literal notranslate"><span class="pre">fetch()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../openalex/fetch.html#multimat.openalex.fetcher.fetch_elsevier"><code class="docutils literal notranslate"><span class="pre">fetch_elsevier()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../openalex/fetch.html#multimat.openalex.fetcher.fetch_springer"><code class="docutils literal notranslate"><span class="pre">fetch_springer()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../elsevier/fetch.html">Fetch Papers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../elsevier/fetch.html#multimat-elsevier-fetcher">multimat.elsevier.fetcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../elsevier/fetch.html#environment-variables">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../elsevier/fetch.html#multimat.elsevier.fetcher.FetchResult"><code class="docutils literal notranslate"><span class="pre">FetchResult</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../elsevier/fetch.html#multimat.elsevier.fetcher.fetch_all"><code class="docutils literal notranslate"><span class="pre">fetch_all()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../elsevier/fetch.html#multimat.elsevier.fetcher.fetch_fulltext_xml"><code class="docutils literal notranslate"><span class="pre">fetch_fulltext_xml()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../elsevier/fetch.html#multimat.elsevier.fetcher.get_pii_from_doi"><code class="docutils literal notranslate"><span class="pre">get_pii_from_doi()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../elsevier/extract.html">Extract Figures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../elsevier/extract.html#multimat.elsevier.extractor.build_image_map"><code class="docutils literal notranslate"><span class="pre">build_image_map()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../elsevier/extract.html#multimat.elsevier.extractor.extract_all"><code class="docutils literal notranslate"><span class="pre">extract_all()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../elsevier/extract.html#multimat.elsevier.extractor.extract_figures"><code class="docutils literal notranslate"><span class="pre">extract_figures()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../elsevier/extract.html#multimat.elsevier.extractor.extract_reference_sentences"><code class="docutils literal notranslate"><span class="pre">extract_reference_sentences()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../elsevier/extract.html#multimat.elsevier.extractor.get_merged_paragraphs"><code class="docutils literal notranslate"><span class="pre">get_merged_paragraphs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../elsevier/extract.html#multimat.elsevier.extractor.process_file"><code class="docutils literal notranslate"><span class="pre">process_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../elsevier/extract.html#multimat.elsevier.extractor.resolve_image_url"><code class="docutils literal notranslate"><span class="pre">resolve_image_url()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../elsevier/download.html">Download Images</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../elsevier/download.html#multimat.elsevier.downloader.build_candidate_urls"><code class="docutils literal notranslate"><span class="pre">build_candidate_urls()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../elsevier/download.html#multimat.elsevier.downloader.download_all"><code class="docutils literal notranslate"><span class="pre">download_all()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../springer/fetch.html">Fetch Papers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../springer/fetch.html#multimat-springer-fetcher">multimat.springer.fetcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../springer/fetch.html#environment-variables">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../springer/fetch.html#multimat.springer.fetcher.FetchResult"><code class="docutils literal notranslate"><span class="pre">FetchResult</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../springer/fetch.html#multimat.springer.fetcher.fetch_all"><code class="docutils literal notranslate"><span class="pre">fetch_all()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../springer/fetch.html#multimat.springer.fetcher.fetch_fulltext_xml"><code class="docutils literal notranslate"><span class="pre">fetch_fulltext_xml()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../springer/extract.html">Extract Figures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../springer/extract.html#multimat.springer.extractor.extract_all"><code class="docutils literal notranslate"><span class="pre">extract_all()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../springer/extract.html#multimat.springer.extractor.extract_figures"><code class="docutils literal notranslate"><span class="pre">extract_figures()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../springer/extract.html#multimat.springer.extractor.extract_reference_sentences"><code class="docutils literal notranslate"><span class="pre">extract_reference_sentences()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../springer/extract.html#multimat.springer.extractor.process_file"><code class="docutils literal notranslate"><span class="pre">process_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../springer/extract.html#multimat.springer.extractor.resolve_image_url"><code class="docutils literal notranslate"><span class="pre">resolve_image_url()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../springer/download.html">Download Images</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../springer/download.html#multimat.springer.downloader.build_candidate_urls"><code class="docutils literal notranslate"><span class="pre">build_candidate_urls()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../springer/download.html#multimat.springer.downloader.download_all"><code class="docutils literal notranslate"><span class="pre">download_all()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../inference/cleaner.html">Cleaner</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../inference/cleaner.html#multimat-inference-cleaner">multimat.inference.cleaner</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../inference/cleaner.html#kept">KEPT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../inference/cleaner.html#deleted">DELETED</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../inference/cleaner.html#multimat.inference.cleaner.CleanResult"><code class="docutils literal notranslate"><span class="pre">CleanResult</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../inference/cleaner.html#multimat.inference.cleaner.clean"><code class="docutils literal notranslate"><span class="pre">clean()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../inference/detector.html">Detector</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../inference/detector.html#multimat-inference-detector">multimat.inference.detector</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../inference/detector.html#flow">Flow</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../inference/detector.html#multimat.inference.detector.DetectionResult"><code class="docutils literal notranslate"><span class="pre">DetectionResult</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../inference/detector.html#multimat.inference.detector.detect"><code class="docutils literal notranslate"><span class="pre">detect()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../inference/detector.html#multimat.inference.detector.resolve_weights"><code class="docutils literal notranslate"><span class="pre">resolve_weights()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../inference/cropper.html">Cropper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../inference/cropper.html#multimat-inference-cropper">multimat.inference.cropper</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../inference/cropper.html#output-naming-convention">Output naming convention</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../inference/cropper.html#multimat.inference.cropper.CropResult"><code class="docutils literal notranslate"><span class="pre">CropResult</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../inference/cropper.html#multimat.inference.cropper.crop"><code class="docutils literal notranslate"><span class="pre">crop()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../inference/crop_csv_builder.html">Crop CSV Builder</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../inference/crop_csv_builder.html#multimat-inference-crop-csv-builder">multimat.inference.crop_csv_builder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../inference/crop_csv_builder.html#multimat.inference.crop_csv_builder.build_crop_csv"><code class="docutils literal notranslate"><span class="pre">build_crop_csv()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../inference/captioner.html">Captioner</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../inference/captioner.html#multimat-inference-captioner">multimat.inference.captioner</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../inference/captioner.html#input">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../inference/captioner.html#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../inference/captioner.html#multimat.inference.captioner.CaptionResult"><code class="docutils literal notranslate"><span class="pre">CaptionResult</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../inference/captioner.html#multimat.inference.captioner.captioner"><code class="docutils literal notranslate"><span class="pre">captioner()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../inference/captioner_azure.html">Azure Captioner</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../inference/captioner_azure.html#multimat-inference-captioner-azure">multimat.inference.captioner_azure</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../inference/captioner_azure.html#input-csv-columns-required">Input CSV columns required</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../inference/captioner_azure.html#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../inference/captioner_azure.html#multimat.inference.captioner_azure.CaptionResult"><code class="docutils literal notranslate"><span class="pre">CaptionResult</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../inference/captioner_azure.html#multimat.inference.captioner_azure.captioner"><code class="docutils literal notranslate"><span class="pre">captioner()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../inference/dataset_builder.html">Dataset Builder</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../inference/dataset_builder.html#multimat-inference-dataset-builder">multimat.inference.dataset_builder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../inference/dataset_builder.html#json-lookup-key">JSON lookup key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../inference/dataset_builder.html#filename-pattern-matched">Filename pattern matched</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../inference/dataset_builder.html#output-columns">Output columns</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../inference/dataset_builder.html#multimat.inference.dataset_builder.BuildResult"><code class="docutils literal notranslate"><span class="pre">BuildResult</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../inference/dataset_builder.html#multimat.inference.dataset_builder.build"><code class="docutils literal notranslate"><span class="pre">build()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../preprocess/pipeline.html">Pipeline</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../preprocess/pipeline.html#multimat-preprocess-pipeline">multimat.preprocess.pipeline</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../preprocess/pipeline.html#notebook-cells-covered">Notebook cells covered</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../preprocess/pipeline.html#multimat.preprocess.pipeline.copy_xmls_by_filename"><code class="docutils literal notranslate"><span class="pre">copy_xmls_by_filename()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../preprocess/pipeline.html#multimat.preprocess.pipeline.drop_duplicate_dois"><code class="docutils literal notranslate"><span class="pre">drop_duplicate_dois()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../preprocess/pipeline.html#multimat.preprocess.pipeline.filter_by_publisher"><code class="docutils literal notranslate"><span class="pre">filter_by_publisher()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../preprocess/pipeline.html#multimat.preprocess.pipeline.filter_open_access"><code class="docutils literal notranslate"><span class="pre">filter_open_access()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../preprocess/pipeline.html#multimat.preprocess.pipeline.find_duplicate_dois"><code class="docutils literal notranslate"><span class="pre">find_duplicate_dois()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../preprocess/pipeline.html#multimat.preprocess.pipeline.flatten_images"><code class="docutils literal notranslate"><span class="pre">flatten_images()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../preprocess/pipeline.html#multimat.preprocess.pipeline.load_csvs"><code class="docutils literal notranslate"><span class="pre">load_csvs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../preprocess/pipeline.html#multimat.preprocess.pipeline.move_xmls_by_doi"><code class="docutils literal notranslate"><span class="pre">move_xmls_by_doi()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../preprocess/pipeline.html#multimat.preprocess.pipeline.prune_images_without_captions"><code class="docutils literal notranslate"><span class="pre">prune_images_without_captions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../preprocess/pipeline.html#multimat.preprocess.pipeline.publisher_counts"><code class="docutils literal notranslate"><span class="pre">publisher_counts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../preprocess/pipeline.html#multimat.preprocess.pipeline.run"><code class="docutils literal notranslate"><span class="pre">run()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../preprocess/pipeline.html#multimat.preprocess.pipeline.save_csv"><code class="docutils literal notranslate"><span class="pre">save_csv()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../preprocess/cc_license.html">CC License</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../preprocess/cc_license.html#multimat-preprocess-cc-license">multimat.preprocess.cc_license</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../preprocess/cc_license.html#notebook-cells-covered">Notebook cells covered</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../preprocess/cc_license.html#multimat.preprocess.cc_license.REDISTRIB_RIGHTS"><code class="docutils literal notranslate"><span class="pre">REDISTRIB_RIGHTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../preprocess/cc_license.html#multimat.preprocess.cc_license.analyse_file"><code class="docutils literal notranslate"><span class="pre">analyse_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../preprocess/cc_license.html#multimat.preprocess.cc_license.filter_figures_cc_by"><code class="docutils literal notranslate"><span class="pre">filter_figures_cc_by()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../preprocess/cc_license.html#multimat.preprocess.cc_license.scan_directory"><code class="docutils literal notranslate"><span class="pre">scan_directory()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../shared/doi_utils.html">DOI Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../shared/doi_utils.html#multimat.shared.doi_utils.append_line"><code class="docutils literal notranslate"><span class="pre">append_line()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../shared/doi_utils.html#multimat.shared.doi_utils.doi_to_filename"><code class="docutils literal notranslate"><span class="pre">doi_to_filename()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../shared/doi_utils.html#multimat.shared.doi_utils.filename_to_doi"><code class="docutils literal notranslate"><span class="pre">filename_to_doi()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../shared/doi_utils.html#multimat.shared.doi_utils.load_set"><code class="docutils literal notranslate"><span class="pre">load_set()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../shared/downloader.html">Downloader</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../shared/downloader.html#multimat-shared-downloader">multimat.shared.downloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../shared/downloader.html#multimat.shared.downloader.DownloadResult"><code class="docutils literal notranslate"><span class="pre">DownloadResult</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../shared/downloader.html#multimat.shared.downloader.append_log"><code class="docutils literal notranslate"><span class="pre">append_log()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../shared/downloader.html#multimat.shared.downloader.download_one"><code class="docutils literal notranslate"><span class="pre">download_one()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../shared/downloader.html#multimat.shared.downloader.extension_from_url"><code class="docutils literal notranslate"><span class="pre">extension_from_url()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../shared/downloader.html#multimat.shared.downloader.load_download_log"><code class="docutils literal notranslate"><span class="pre">load_download_log()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../shared/downloader.html#multimat.shared.downloader.next_name_allocator"><code class="docutils literal notranslate"><span class="pre">next_name_allocator()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../shared/downloader.html#multimat.shared.downloader.run_downloads"><code class="docutils literal notranslate"><span class="pre">run_downloads()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../shared/sentence_utils.html">Sentence Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../shared/sentence_utils.html#multimat.shared.sentence_utils.split_sentences"><code class="docutils literal notranslate"><span class="pre">split_sentences()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">MultiMat</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">multimat.inference.captioner</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for multimat.inference.captioner</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">multimat.inference.captioner</span>
+<span class="sd">====================================</span>
+<span class="sd">Generate per-panel sub-captions using Gemini, from figure captions and</span>
+<span class="sd">reference sentences extracted during the XML extraction step.</span>
+
+<span class="sd">Ported from ``gen_subcaption_single.py`` — globals → parameters.</span>
+
+<span class="sd">Input</span>
+<span class="sd">-----</span>
+<span class="sd">A CSV with columns: ``downloaded_image_name``, ``caption``,</span>
+<span class="sd">``reference_sentences``, ``download_status``.</span>
+
+<span class="sd">Output</span>
+<span class="sd">------</span>
+<span class="sd">One JSON file per row in *output_dir*, named</span>
+<span class="sd">``&lt;downloaded_image_name&gt;.json``, with schema::</span>
+
+<span class="sd">    {</span>
+<span class="sd">        &quot;panels&quot;: [</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;panel&quot;:                    &quot;a&quot;,</span>
+<span class="sd">                &quot;visualization_category&quot;:  &quot;Microscopy&quot;,</span>
+<span class="sd">                &quot;visualization_subtype&quot;:   &quot;SEM&quot;,</span>
+<span class="sd">                &quot;subcaption&quot;:              &quot;...&quot;,</span>
+<span class="sd">                &quot;summary&quot;:                 &quot;...&quot;</span>
+<span class="sd">            },</span>
+<span class="sd">            ...</span>
+<span class="sd">        ]</span>
+<span class="sd">    }</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Taxonomy</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+<span class="n">VISUALIZATION_CATEGORIES</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Microscopy&quot;</span><span class="p">,</span> <span class="s2">&quot;Diffraction&quot;</span><span class="p">,</span> <span class="s2">&quot;Spectroscopy&quot;</span><span class="p">,</span> <span class="s2">&quot;Thermal Analysis&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Phase/Equilibrium Diagram&quot;</span><span class="p">,</span> <span class="s2">&quot;Mechanical Test&quot;</span><span class="p">,</span> <span class="s2">&quot;Electrochemistry&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Magnetic/Electronic&quot;</span><span class="p">,</span> <span class="s2">&quot;Optical/Photonic&quot;</span><span class="p">,</span> <span class="s2">&quot;Tomography/3D&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Compositional Map&quot;</span><span class="p">,</span> <span class="s2">&quot;Simulation&quot;</span><span class="p">,</span> <span class="s2">&quot;Machine Learning&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Crystal Structure&quot;</span><span class="p">,</span> <span class="s2">&quot;Generic Plot&quot;</span><span class="p">,</span> <span class="s2">&quot;Schematic/Diagram&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Photograph&quot;</span><span class="p">,</span> <span class="s2">&quot;Table&quot;</span><span class="p">,</span> <span class="s2">&quot;other&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">SUBTYPES_BY_CATEGORY</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Microscopy&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;SEM&quot;</span><span class="p">,</span> <span class="s2">&quot;TEM&quot;</span><span class="p">,</span> <span class="s2">&quot;STEM&quot;</span><span class="p">,</span> <span class="s2">&quot;HAADF-STEM&quot;</span><span class="p">,</span> <span class="s2">&quot;BF-TEM&quot;</span><span class="p">,</span> <span class="s2">&quot;DF-TEM&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Optical Micrograph&quot;</span><span class="p">,</span> <span class="s2">&quot;Confocal Microscopy&quot;</span><span class="p">,</span> <span class="s2">&quot;AFM&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Fluorescence Microscopy&quot;</span><span class="p">,</span> <span class="s2">&quot;Live/Dead Staining&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Diffraction&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;XRD Pattern&quot;</span><span class="p">,</span> <span class="s2">&quot;SAED&quot;</span><span class="p">,</span> <span class="s2">&quot;EBSD Map&quot;</span><span class="p">,</span> <span class="s2">&quot;Pole Figure&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Inverse Pole Figure&quot;</span><span class="p">,</span> <span class="s2">&quot;Neutron Diffraction&quot;</span><span class="p">,</span> <span class="s2">&quot;Synchrotron Diffraction&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Spectroscopy&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;XPS Spectrum&quot;</span><span class="p">,</span> <span class="s2">&quot;Raman Spectrum&quot;</span><span class="p">,</span> <span class="s2">&quot;FTIR Spectrum&quot;</span><span class="p">,</span> <span class="s2">&quot;EDX Spectrum&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;EELS Spectrum&quot;</span><span class="p">,</span> <span class="s2">&quot;NMR Spectrum&quot;</span><span class="p">,</span> <span class="s2">&quot;Mass Spectrum&quot;</span><span class="p">,</span> <span class="s2">&quot;UV-Vis Spectrum&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Photoluminescence Spectrum&quot;</span><span class="p">,</span> <span class="s2">&quot;XANES Spectrum&quot;</span><span class="p">,</span> <span class="s2">&quot;EXAFS Spectrum&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Mössbauer Spectrum&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Thermal Analysis&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;DSC Curve&quot;</span><span class="p">,</span> <span class="s2">&quot;TGA Curve&quot;</span><span class="p">,</span> <span class="s2">&quot;DMA Curve&quot;</span><span class="p">,</span> <span class="s2">&quot;TMA Curve&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Phase/Equilibrium Diagram&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Binary Phase Diagram&quot;</span><span class="p">,</span> <span class="s2">&quot;Ternary Phase Diagram&quot;</span><span class="p">,</span> <span class="s2">&quot;TTT Diagram&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CCT Diagram&quot;</span><span class="p">,</span> <span class="s2">&quot;CALPHAD Diagram&quot;</span><span class="p">,</span> <span class="s2">&quot;Pourbaix Diagram&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Mechanical Test&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Stress-Strain Curve&quot;</span><span class="p">,</span> <span class="s2">&quot;Load-Displacement Curve&quot;</span><span class="p">,</span> <span class="s2">&quot;Nanoindentation Curve&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Hardness Map&quot;</span><span class="p">,</span> <span class="s2">&quot;Fatigue/S-N Curve&quot;</span><span class="p">,</span> <span class="s2">&quot;Creep Curve&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Fracture Toughness Plot&quot;</span><span class="p">,</span> <span class="s2">&quot;DIC Strain Map&quot;</span><span class="p">,</span> <span class="s2">&quot;Wear/Tribology Plot&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Electrochemistry&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Cyclic Voltammogram&quot;</span><span class="p">,</span> <span class="s2">&quot;Charge-Discharge Curve&quot;</span><span class="p">,</span> <span class="s2">&quot;Capacity Retention Plot&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Coulombic Efficiency Plot&quot;</span><span class="p">,</span> <span class="s2">&quot;Nyquist Plot&quot;</span><span class="p">,</span> <span class="s2">&quot;Bode Plot&quot;</span><span class="p">,</span> <span class="s2">&quot;Tafel Plot&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Polarization Curve&quot;</span><span class="p">,</span> <span class="s2">&quot;GITT/PITT Curve&quot;</span><span class="p">,</span> <span class="s2">&quot;Rate Capability Plot&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Magnetic/Electronic&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;M-H Hysteresis Loop&quot;</span><span class="p">,</span> <span class="s2">&quot;M-T Curve&quot;</span><span class="p">,</span> <span class="s2">&quot;ZFC/FC Curve&quot;</span><span class="p">,</span> <span class="s2">&quot;I-V Curve&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;C-V Curve&quot;</span><span class="p">,</span> <span class="s2">&quot;Band Structure&quot;</span><span class="p">,</span> <span class="s2">&quot;Density of States&quot;</span><span class="p">,</span> <span class="s2">&quot;Hall Effect Plot&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Optical/Photonic&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Absorbance Spectrum&quot;</span><span class="p">,</span> <span class="s2">&quot;Transmittance Spectrum&quot;</span><span class="p">,</span> <span class="s2">&quot;Reflectance Spectrum&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;EQE/IQE Plot&quot;</span><span class="p">,</span> <span class="s2">&quot;J-V Curve&quot;</span><span class="p">,</span> <span class="s2">&quot;Ellipsometry Plot&quot;</span><span class="p">,</span> <span class="s2">&quot;Refractive Index Plot&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Tomography/3D&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;APT Reconstruction&quot;</span><span class="p">,</span> <span class="s2">&quot;Micro-CT&quot;</span><span class="p">,</span> <span class="s2">&quot;FIB-SEM Tomography&quot;</span><span class="p">,</span> <span class="s2">&quot;3D Reconstruction&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Compositional Map&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;EDS Map&quot;</span><span class="p">,</span> <span class="s2">&quot;WDS Map&quot;</span><span class="p">,</span> <span class="s2">&quot;EBSD IPF Map&quot;</span><span class="p">,</span> <span class="s2">&quot;Elemental Distribution Map&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Simulation&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;DFT Result&quot;</span><span class="p">,</span> <span class="s2">&quot;MD Snapshot&quot;</span><span class="p">,</span> <span class="s2">&quot;MD Trajectory&quot;</span><span class="p">,</span> <span class="s2">&quot;Phase-Field Simulation&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;FEA/FEM Result&quot;</span><span class="p">,</span> <span class="s2">&quot;Monte Carlo Result&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Machine Learning&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Parity Plot&quot;</span><span class="p">,</span> <span class="s2">&quot;Confusion Matrix&quot;</span><span class="p">,</span> <span class="s2">&quot;ROC Curve&quot;</span><span class="p">,</span> <span class="s2">&quot;Learning Curve&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Feature Importance Plot&quot;</span><span class="p">,</span> <span class="s2">&quot;SHAP Plot&quot;</span><span class="p">,</span> <span class="s2">&quot;t-SNE/UMAP/PCA Plot&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Crystal Structure&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Unit Cell&quot;</span><span class="p">,</span> <span class="s2">&quot;Atomic Model&quot;</span><span class="p">,</span> <span class="s2">&quot;Supercell&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Generic Plot&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Bar Chart&quot;</span><span class="p">,</span> <span class="s2">&quot;Scatter Plot&quot;</span><span class="p">,</span> <span class="s2">&quot;Line Graph&quot;</span><span class="p">,</span> <span class="s2">&quot;Box Plot&quot;</span><span class="p">,</span> <span class="s2">&quot;Contour Plot&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Heatmap&quot;</span><span class="p">,</span> <span class="s2">&quot;Radar Chart&quot;</span><span class="p">,</span> <span class="s2">&quot;Ashby Plot&quot;</span><span class="p">,</span> <span class="s2">&quot;Arrhenius Plot&quot;</span><span class="p">,</span> <span class="s2">&quot;Histogram&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Schematic/Diagram&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Process Schematic&quot;</span><span class="p">,</span> <span class="s2">&quot;Flowchart&quot;</span><span class="p">,</span> <span class="s2">&quot;Mechanism Diagram&quot;</span><span class="p">,</span> <span class="s2">&quot;Experimental Setup&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Photograph&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Sample Photo&quot;</span><span class="p">,</span> <span class="s2">&quot;Equipment Photo&quot;</span><span class="p">,</span> <span class="s2">&quot;In-situ Photo&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Table&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Data Table&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;other&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;other&quot;</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">VISUALIZATION_SUBTYPES</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span>
+    <span class="n">sub</span> <span class="k">for</span> <span class="n">subs</span> <span class="ow">in</span> <span class="n">SUBTYPES_BY_CATEGORY</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">subs</span>
+<span class="p">))</span>
+
+<span class="n">_TAXONOMY_BLOCK</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">cat</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">subs</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">for</span> <span class="n">cat</span><span class="p">,</span> <span class="n">subs</span> <span class="ow">in</span> <span class="n">SUBTYPES_BY_CATEGORY</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">_PROMPT_TEMPLATE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">You are a scientific figure analysis expert covering all of materials science </span><span class="se">\</span>
+<span class="s2">(metals/alloys, ceramics, polymers, composites, semiconductors, batteries, </span><span class="se">\</span>
+<span class="s2">catalysts, biomaterials, 2D materials, etc.).</span>
+
+<span class="s2">Using only the figure caption and the reference sentences from the paper, </span><span class="se">\</span>
+<span class="s2">generate detailed sub-captions for each panel of the figure.</span>
+
+<span class="s2">Figure caption:</span>
+<span class="si">{caption}</span>
+
+<span class="s2">Reference sentences from the paper:</span>
+<span class="si">{reference_sentences}</span>
+
+<span class="s2">INSTRUCTIONS:</span>
+<span class="s2">- Generate a sub-caption for each panel (a, b, c, …); use panel id &quot;main&quot; for single-panel figures.</span>
+<span class="s2">- Classify each panel with TWO fields, chosen ONLY from the allowed taxonomy below:</span>
+<span class="s2">    * visualization_category: the broad category.</span>
+<span class="s2">    * visualization_subtype: the specific technique/plot type, which MUST belong to the chosen category.</span>
+<span class="s2">- Both fields are strict enums. Use &quot;other&quot; only if absolutely nothing matches.</span>
+<span class="s2">- For plots/graphs: state axes, specimen/condition, test method, and any key trend or value from the caption or reference.</span>
+<span class="s2">- For images/maps: state material, technique, orientation/view, processing condition, and key observation or structural feature.</span>
+<span class="s2">- The caption is the ground truth — never contradict it.</span>
+<span class="s2">- Use a reference sentence only if it clearly supports the caption content.</span>
+<span class="s2">- Group-level references apply to all panels; references naming a specific panel letter apply only to that panel.</span>
+<span class="s2">- Do not start every sub-caption identically — vary sentence openings.</span>
+<span class="s2">- Expand the caption into a precise scientific description — do not copy it verbatim.</span>
+<span class="s2">- For each panel, write a summary of 30-50 words using only that panel&#39;s subcaption and directly related references.</span>
+
+<span class="s2">ALLOWED TAXONOMY (category → valid subtypes):</span>
+<span class="si">{taxonomy}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Result container</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="CaptionResult">
+<a class="viewcode-back" href="../../../inference/captioner.html#multimat.inference.captioner.CaptionResult">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CaptionResult</span><span class="p">:</span>
+    <span class="n">n_total</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n_success</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n_error</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n_skipped</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># Core API</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="captioner">
+<a class="viewcode-back" href="../../../inference/captioner.html#multimat.inference.captioner.captioner">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">captioner</span><span class="p">(</span>
+    <span class="n">csv_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">api_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;gemini-3.1-flash-lite&quot;</span><span class="p">,</span>
+    <span class="n">max_tokens</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4096</span><span class="p">,</span>
+    <span class="n">max_retries</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CaptionResult</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate sub-captions for every successfully downloaded figure.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    csv_path:</span>
+<span class="sd">        Figure CSV with columns ``downloaded_image_name``, ``caption``,</span>
+<span class="sd">        ``reference_sentences``, ``download_status``.</span>
+<span class="sd">    output_dir:</span>
+<span class="sd">        Directory where one JSON per figure is written.</span>
+<span class="sd">    api_key:</span>
+<span class="sd">        Google Gemini API key. Falls back to ``GOOGLE_API_KEY`` env var.</span>
+<span class="sd">    model_name:</span>
+<span class="sd">        Gemini model string.</span>
+<span class="sd">    max_tokens:</span>
+<span class="sd">        Max output tokens per request.</span>
+<span class="sd">    max_retries:</span>
+<span class="sd">        Retry attempts on API error.</span>
+<span class="sd">    overwrite:</span>
+<span class="sd">        Re-generate even if the output JSON already exists.</span>
+<span class="sd">    verbose:</span>
+<span class="sd">        Print progress.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    CaptionResult</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">google</span><span class="w"> </span><span class="kn">import</span> <span class="n">genai</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">google.genai</span><span class="w"> </span><span class="kn">import</span> <span class="n">types</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+            <span class="s2">&quot;google-genai is required: pip install google-genai&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">api_key</span> <span class="o">=</span> <span class="n">api_key</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;GOOGLE_API_KEY&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">api_key</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">EnvironmentError</span><span class="p">(</span>
+            <span class="s2">&quot;Gemini API key required. Set GOOGLE_API_KEY or pass api_key=.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">output_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+    <span class="n">output_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">client</span> <span class="o">=</span> <span class="n">genai</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+
+    <span class="n">response_schema</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">Schema</span><span class="p">(</span>
+        <span class="nb">type</span><span class="o">=</span><span class="n">types</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">OBJECT</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;panels&quot;</span><span class="p">],</span>
+        <span class="n">properties</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;panels&quot;</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">Schema</span><span class="p">(</span>
+                <span class="nb">type</span><span class="o">=</span><span class="n">types</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">ARRAY</span><span class="p">,</span>
+                <span class="n">items</span><span class="o">=</span><span class="n">types</span><span class="o">.</span><span class="n">Schema</span><span class="p">(</span>
+                    <span class="nb">type</span><span class="o">=</span><span class="n">types</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">OBJECT</span><span class="p">,</span>
+                    <span class="n">required</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;panel&quot;</span><span class="p">,</span> <span class="s2">&quot;visualization_category&quot;</span><span class="p">,</span>
+                               <span class="s2">&quot;visualization_subtype&quot;</span><span class="p">,</span> <span class="s2">&quot;subcaption&quot;</span><span class="p">,</span> <span class="s2">&quot;summary&quot;</span><span class="p">],</span>
+                    <span class="n">properties</span><span class="o">=</span><span class="p">{</span>
+                        <span class="s2">&quot;panel&quot;</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">Schema</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">types</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">STRING</span><span class="p">),</span>
+                        <span class="s2">&quot;visualization_category&quot;</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">Schema</span><span class="p">(</span>
+                            <span class="nb">type</span><span class="o">=</span><span class="n">types</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">STRING</span><span class="p">,</span>
+                            <span class="n">enum</span><span class="o">=</span><span class="n">VISUALIZATION_CATEGORIES</span><span class="p">,</span>
+                        <span class="p">),</span>
+                        <span class="s2">&quot;visualization_subtype&quot;</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">Schema</span><span class="p">(</span>
+                            <span class="nb">type</span><span class="o">=</span><span class="n">types</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">STRING</span><span class="p">,</span>
+                        <span class="p">),</span>
+                        <span class="s2">&quot;subcaption&quot;</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">Schema</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">types</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">STRING</span><span class="p">),</span>
+                        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">Schema</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">types</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">STRING</span><span class="p">),</span>
+                    <span class="p">},</span>
+                <span class="p">),</span>
+            <span class="p">),</span>
+        <span class="p">},</span>
+    <span class="p">)</span>
+
+    <span class="n">generate_config</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">GenerateContentConfig</span><span class="p">(</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">max_output_tokens</span><span class="o">=</span><span class="n">max_tokens</span><span class="p">,</span>
+        <span class="n">response_mime_type</span><span class="o">=</span><span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+        <span class="n">response_schema</span><span class="o">=</span><span class="n">response_schema</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">csv_path</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">fh</span><span class="p">))</span>
+
+    <span class="n">pending</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rows</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="c1"># Accept rows that explicitly succeeded, OR rows with no</span>
+            <span class="c1"># download_status column at all (e.g. crops_for_captioning.csv)</span>
+            <span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;download_status&quot;</span><span class="p">,</span> <span class="s2">&quot;success&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="nb">str</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;downloaded_image_name&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="ow">and</span> <span class="p">(</span><span class="n">overwrite</span> <span class="ow">or</span> <span class="ow">not</span> <span class="p">(</span><span class="n">output_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;downloaded_image_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+    <span class="p">]</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">CaptionResult</span><span class="p">(</span>
+        <span class="n">n_total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">pending</span><span class="p">),</span>
+        <span class="n">output_dir</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">output_dir</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[captioner] </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="si">}</span><span class="s2"> total rows | </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pending</span><span class="p">)</span><span class="si">}</span><span class="s2"> pending | model=</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">pending</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[captioner] Nothing to do.&quot;</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">n_skipped</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pending</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">image_name</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;downloaded_image_name&quot;</span><span class="p">]</span>
+        <span class="n">prompt</span> <span class="o">=</span> <span class="n">_PROMPT_TEMPLATE</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">caption</span><span class="o">=</span><span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;caption&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+            <span class="n">reference_sentences</span><span class="o">=</span><span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reference_sentences&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+            <span class="n">taxonomy</span><span class="o">=</span><span class="n">_TAXONOMY_BLOCK</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">last_error</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">parsed</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_retries</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">generate_content</span><span class="p">(</span>
+                    <span class="n">model</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+                    <span class="n">contents</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+                    <span class="n">config</span><span class="o">=</span><span class="n">generate_config</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">parsed</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+                <span class="n">last_error</span> <span class="o">=</span> <span class="n">exc</span>
+                <span class="k">if</span> <span class="n">attempt</span> <span class="o">&lt;</span> <span class="n">max_retries</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">attempt</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">parsed</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">parsed</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">last_error</span><span class="p">)}</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">n_error</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  [</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pending</span><span class="p">)</span><span class="si">}</span><span class="s2">] ERROR </span><span class="si">{</span><span class="n">image_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">last_error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">n_success</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">verbose</span> <span class="ow">and</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">pending</span><span class="p">)):</span>
+                <span class="n">pct</span> <span class="o">=</span> <span class="n">i</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">pending</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;  [</span><span class="si">{</span><span class="n">pct</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2">%] </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pending</span><span class="p">)</span><span class="si">}</span><span class="s2"> &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;ok=</span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">n_success</span><span class="si">}</span><span class="s2"> err=</span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">n_error</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+
+        <span class="n">out_path</span> <span class="o">=</span> <span class="n">output_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">image_name</span><span class="si">}</span><span class="s2">.json&quot;</span>
+        <span class="n">out_path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">parsed</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[captioner] done — success=</span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">n_success</span><span class="si">}</span><span class="s2">  errors=</span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">n_error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------</span>
+<span class="c1"># CLI</span>
+<span class="c1"># ---------------------------------------------------------------------------</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_parse_args</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">:</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="s2">&quot;Generate sub-captions with Gemini&quot;</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--csv&quot;</span><span class="p">,</span>        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Figure CSV path&quot;</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--output-dir&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--api-key&quot;</span><span class="p">,</span>    <span class="n">default</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;GOOGLE_API_KEY&quot;</span><span class="p">))</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--model&quot;</span><span class="p">,</span>      <span class="n">default</span><span class="o">=</span><span class="s2">&quot;gemini-3.1-flash-lite&quot;</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--max-tokens&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">4096</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--overwrite&quot;</span><span class="p">,</span>  <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">p</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">_parse_args</span><span class="p">()</span>
+    <span class="n">captioner</span><span class="p">(</span>
+        <span class="n">csv_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">csv</span><span class="p">,</span>
+        <span class="n">output_dir</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span>
+        <span class="n">api_key</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">api_key</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
+        <span class="n">max_tokens</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">max_tokens</span><span class="p">,</span>
+        <span class="n">overwrite</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">overwrite</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

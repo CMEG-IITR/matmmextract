@@ -1,5 +1,5 @@
 Dataset Builder
 ===============
 
-.. automodule:: paper_pipeline.inference.dataset_builder
+.. automodule:: multimat.inference.dataset_builder
    :members:

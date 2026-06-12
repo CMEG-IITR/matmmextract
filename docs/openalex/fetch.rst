@@ -1,5 +1,5 @@
 Fetch Papers
 ============
 
-.. automodule:: paper_pipeline.openalex.fetcher
+.. automodule:: multimat.openalex.fetcher
    :members:

@@ -1,5 +1,5 @@
 Download Images
 ===============
 
-.. automodule:: paper_pipeline.springer.downloader
+.. automodule:: multimat.springer.downloader
    :members:

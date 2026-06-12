@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "paper-pipeline"
+name = "multimat"
 version = "0.1.0"
 description = "Scientific paper acquisition, extraction, preprocessing, detection and captioning pipeline"
 readme = "README.md"
@@ -37,4 +37,3 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
-

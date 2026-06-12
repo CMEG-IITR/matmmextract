@@ -1,21 +1,22 @@
-from paper_pipeline.openalex.fetcher import fetch_springer
-from paper_pipeline.preprocess.pipeline import load_csvs
+from multimat.openalex.fetcher import fetch_springer
+from multimat.preprocess.pipeline import load_csvs
 
-from paper_pipeline.springer.fetcher import fetch_all as springer_fetch
-from paper_pipeline.springer.extractor import extract_all as springer_extract
-from paper_pipeline.springer.downloader import download_all as springer_download
+from multimat.springer.fetcher import fetch_all as springer_fetch
+from multimat.springer.extractor import extract_all as springer_extract
+from multimat.springer.downloader import download_all as springer_download
 
-from paper_pipeline.inference.detector import detect
-from paper_pipeline.inference.cropper import crop
-from paper_pipeline.inference.crop_csv_builder import build_crop_csv
-from paper_pipeline.inference.captioner_azure import captioner as azure_caption
-from paper_pipeline.inference.dataset_builder import build
+from multimat.inference.detector import detect
+from multimat.inference.cropper import crop
+from multimat.inference.crop_csv_builder import build_crop_csv
+from multimat.inference.captioner_azure import captioner as azure_caption
+from multimat.inference.dataset_builder import build
 
 springer_result = fetch_springer(
     license_="cc-by",
     keywords=["alloy"],
     max_results=2,
     output_csv="output/springer_papers.csv",
+    api_key="",
 )
 
 springer_df = load_csvs(["output/springer_papers.csv"])

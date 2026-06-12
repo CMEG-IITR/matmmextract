@@ -1,5 +1,5 @@
 Cleaner
 =======
 
-.. automodule:: paper_pipeline.inference.cleaner
+.. automodule:: multimat.inference.cleaner
    :members:

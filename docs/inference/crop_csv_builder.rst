@@ -1,5 +1,5 @@
 Crop CSV Builder
 ================
 
-.. automodule:: paper_pipeline.inference.crop_csv_builder
+.. automodule:: multimat.inference.crop_csv_builder
    :members:

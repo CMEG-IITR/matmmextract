@@ -1,5 +1,5 @@
 Captioner
 =========
 
-.. automodule:: paper_pipeline.inference.captioner
+.. automodule:: multimat.inference.captioner
    :members:

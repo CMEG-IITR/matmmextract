@@ -1,5 +1,5 @@
 Fetch Papers
 ============
 
-.. automodule:: paper_pipeline.springer.fetcher
+.. automodule:: multimat.springer.fetcher
    :members:

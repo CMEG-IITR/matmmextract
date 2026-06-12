@@ -1,5 +1,5 @@
 Pipeline
 ========
 
-.. automodule:: paper_pipeline.preprocess.pipeline
+.. automodule:: multimat.preprocess.pipeline
    :members:

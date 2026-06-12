@@ -1,10 +1,8 @@
-# Core
 pandas>=3.0
 requests>=2.34
 beautifulsoup4>=4.14
 lxml>=6.1
 
-# Inference
 torch>=2.12
 torchvision>=0.27
 ultralytics>=8.4
@@ -12,9 +10,7 @@ Pillow>=12.2
 tqdm>=4.68
 transformers>=5.10
 
-# Captioning
 google-genai>=2.8
 openai>=2.41
 
-# Utilities
 numpy>=2.4

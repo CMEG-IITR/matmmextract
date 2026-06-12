@@ -1,5 +1,5 @@
 Cropper
 =======
 
-.. automodule:: paper_pipeline.inference.cropper
+.. automodule:: multimat.inference.cropper
    :members:

@@ -1,5 +1,5 @@
 Azure Captioner
 ===============
 
-.. automodule:: paper_pipeline.inference.captioner_azure
+.. automodule:: multimat.inference.captioner_azure
    :members:

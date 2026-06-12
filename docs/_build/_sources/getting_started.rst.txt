@@ -8,22 +8,9 @@ Installation
 
    pip install -e .
 
-Quick Example
--------------
+Build docs
+----------
 
-Fetch OpenAlex papers:
+.. code-block:: bash
 
-.. code-block:: python
-
-   from paper_pipeline.openalex import fetch_elsevier
-
-   result = fetch_elsevier(
-       keywords=["titanium alloy", "microstructure"],
-       from_year=2020,
-       to_year=2024,
-       max_results=500,
-   )
-
-   print(result.df.head())
-
-See the Examples section for complete workflows.
+   sphinx-build -b html docs docs/_build

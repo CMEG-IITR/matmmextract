@@ -1,5 +1,5 @@
 Downloader
 ==========
 
-.. automodule:: paper_pipeline.shared.downloader
+.. automodule:: multimat.shared.downloader
    :members:

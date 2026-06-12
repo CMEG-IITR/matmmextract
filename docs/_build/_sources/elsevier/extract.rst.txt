@@ -1,5 +1,5 @@
 Extract Figures
 ===============
 
-.. automodule:: paper_pipeline.elsevier.extractor
+.. automodule:: multimat.elsevier.extractor
    :members:

@@ -1,5 +1,5 @@
 Fetch Papers
 ============
 
-.. automodule:: paper_pipeline.elsevier.fetcher
+.. automodule:: multimat.elsevier.fetcher
    :members:
