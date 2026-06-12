@@ -1,0 +1,96 @@
+API Reference
+=============
+
+OpenAlex
+---------
+
+.. automodule:: paper_pipeline.openalex.fetcher
+   :members:
+   :undoc-members:
+
+Elsevier
+---------
+
+.. automodule:: paper_pipeline.elsevier.fetcher
+   :members:
+   :undoc-members:
+
+.. automodule:: paper_pipeline.elsevier.downloader
+   :members:
+   :undoc-members:
+
+.. automodule:: paper_pipeline.elsevier.extractor
+   :members:
+   :undoc-members:
+
+Springer
+---------
+
+.. automodule:: paper_pipeline.springer.fetcher
+   :members:
+   :undoc-members:
+
+.. automodule:: paper_pipeline.springer.downloader
+   :members:
+   :undoc-members:
+
+.. automodule:: paper_pipeline.springer.extractor
+   :members:
+   :undoc-members:
+
+Inference
+----------
+
+.. automodule:: paper_pipeline.inference.captioner
+   :members:
+   :undoc-members:
+
+.. automodule:: paper_pipeline.inference.captioner_azure
+   :members:
+   :undoc-members:
+
+.. automodule:: paper_pipeline.inference.cleaner
+   :members:
+   :undoc-members:
+
+.. automodule:: paper_pipeline.inference.cropper
+   :members:
+   :undoc-members:
+
+.. automodule:: paper_pipeline.inference.detector
+   :members:
+   :undoc-members:
+
+.. automodule:: paper_pipeline.inference.dataset_builder
+   :members:
+   :undoc-members:
+
+.. automodule:: paper_pipeline.inference.crop_csv_builder
+   :members:
+   :undoc-members:
+
+Preprocess
+-----------
+
+.. automodule:: paper_pipeline.preprocess.pipeline
+   :members:
+   :undoc-members:
+
+.. automodule:: paper_pipeline.preprocess.cc_license
+   :members:
+   :undoc-members:
+
+Shared
+-------
+
+.. automodule:: paper_pipeline.shared.downloader
+   :members:
+   :undoc-members:
+
+.. automodule:: paper_pipeline.shared.doi_utils
+   :members:
+   :undoc-members:
+
+.. automodule:: paper_pipeline.shared.sentence_utils
+   :members:
+   :undoc-members:
