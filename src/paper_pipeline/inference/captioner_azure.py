@@ -60,7 +60,7 @@ from paper_pipeline.inference.captioner import (
 # Azure defaults
 # ---------------------------------------------------------------------------
 
-DEFAULT_AZURE_ENDPOINT = "https://subha-mcsj09dy-eastus2.services.ai.azure.com/openai/v1"
+DEFAULT_AZURE_ENDPOINT = ""
 DEFAULT_MODEL = "Mistral-Large-3"
 DEFAULT_MAX_TOKENS = 4096
 DEFAULT_MAX_RETRIES = 4

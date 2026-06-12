@@ -68,6 +68,7 @@ azure_caption(
     csv_path="output/crops_for_captioning.csv",
     output_dir="subcaptions",
     api_key="",
+    azure_endpoint="",
     model_name="Mistral-Large-3",
     image_name_col="downloaded_image_name",   # matches crops_for_captioning.csv
     caption_col="caption",

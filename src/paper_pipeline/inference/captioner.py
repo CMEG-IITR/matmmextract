@@ -183,7 +183,7 @@ def captioner(
     csv_path: str | Path,
     output_dir: str | Path,
     api_key: str | None = None,
-    model_name: str = "gemini-2.0-flash-lite",
+    model_name: str = "gemini-3.1-flash-lite",
     max_tokens: int = 4096,
     max_retries: int = 4,
     overwrite: bool = False,
@@ -352,7 +352,7 @@ def _parse_args() -> argparse.Namespace:
     p.add_argument("--csv",        required=True, help="Figure CSV path")
     p.add_argument("--output-dir", required=True)
     p.add_argument("--api-key",    default=os.environ.get("GOOGLE_API_KEY"))
-    p.add_argument("--model",      default="gemini-2.0-flash-lite")
+    p.add_argument("--model",      default="gemini-3.1-flash-lite")
     p.add_argument("--max-tokens", type=int, default=4096)
     p.add_argument("--overwrite",  action="store_true")
     return p.parse_args()
