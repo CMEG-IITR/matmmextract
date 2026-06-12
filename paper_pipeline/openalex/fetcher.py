@@ -190,6 +190,7 @@ def fetch(
     max_results: int = 1000,
     output_csv: str | Path | None = None,
     email: str | None = None,
+    api_key: str | None = None,
     per_page: int = 200,
     verbose: bool = True,
 ) -> FetchResult:
@@ -219,7 +220,10 @@ def fetch(
     output_csv:
         If provided, save the DataFrame as CSV.
     email:
-        Your email address for the OpenAlex polite pool (faster rates).
+        Your email address for the OpenAlex polite pool (appended to User-Agent).
+    api_key:
+        Free OpenAlex API key (get one at https://openalex.org/settings/api).
+        Required for reliable access; passed as ``?api_key=`` query parameter.
     per_page:
         Results per API page (max 200).
     verbose:
@@ -273,6 +277,8 @@ def fetch(
         "cursor":   "*",
         "sort":     "cited_by_count:desc",
     }
+    if api_key:
+        params["api_key"] = api_key
 
     if search_query:
         params["search"] = search_query
@@ -310,12 +316,16 @@ def fetch(
             break
 
         for work in results:
-            if publisher in _parse_work(work)["Publisher"]:
-                for kw in keywords:
-                    if kw in _parse_work(work)["Title"] + _parse_work(work)["Concepts"]:
-                        rows.append(_parse_work(work))
-                        if len(rows) >= max_results:
-                            break
+            if len(rows) >= max_results:
+                break
+            parsed = _parse_work(work)
+            if publisher and publisher.lower() not in parsed["Publisher"].lower():
+                continue
+            if keywords:
+                haystack = (parsed["Title"] + " " + parsed["Concepts"]).lower()
+                if not any(kw.lower() in haystack for kw in keywords):
+                    continue
+            rows.append(parsed)
 
         page += 1
         if verbose:
@@ -385,6 +395,7 @@ def fetch_elsevier(
     max_results: int = 1000,
     output_csv: str | Path | None = None,
     email: str | None = None,
+    api_key: str | None = None,
     verbose: bool = True,
 ) -> FetchResult:
     """Fetch Elsevier works.  Shorthand for ``fetch(publisher="Elsevier", ...)``."""
@@ -397,6 +408,7 @@ def fetch_elsevier(
         max_results=max_results,
         output_csv=output_csv,
         email=email,
+        api_key=api_key,
         verbose=verbose,
     )
 
@@ -409,6 +421,7 @@ def fetch_springer(
     max_results: int = 1000,
     output_csv: str | Path | None = None,
     email: str | None = None,
+    api_key: str | None = None,
     verbose: bool = True,
 ) -> FetchResult:
     """Fetch Springer works.  Shorthand for ``fetch(publisher="Springer", ...)``."""
@@ -421,6 +434,7 @@ def fetch_springer(
         max_results=max_results,
         output_csv=output_csv,
         email=email,
+        api_key=api_key,
         verbose=verbose,
     )
 
@@ -447,6 +461,8 @@ def _parse_args() -> argparse.Namespace:
     p.add_argument("--output-csv",   required=True)
     p.add_argument("--email",        default=None,
                    help="Your email for OpenAlex polite pool (optional)")
+    p.add_argument("--api-key",      default=None,
+                   help="Free OpenAlex API key (see https://openalex.org/settings/api)")
     return p.parse_args()
 
 
@@ -462,6 +478,7 @@ def main() -> None:
         max_results=args.max_results,
         output_csv=args.output_csv,
         email=args.email,
+        api_key=args.api_key,
     )
 
 

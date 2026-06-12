@@ -38,16 +38,21 @@ from datetime import datetime
 from pathlib import Path
 
 IMG_RE = re.compile(
-    r"^(img\d+)_(single|common|[A-Z])(?:_(\d+))?\.jpg$",
+    r"^(.+)_(single|[A-Z])(?:_(\d+))?\.jpg$",
     re.IGNORECASE,
 )
 
 CSV_FIELDS = [
     "image_filename",
+    "image_id",
+    "panel_suffix",
+    "variant",
+    "json_panel",
     "visualization_category",
     "visualization_subtype",
     "subcaption",
     "summary",
+    "matched",
 ]
 
 
@@ -137,42 +142,47 @@ def build(
             skipped_pattern.append(fname)
             continue
 
-        panel_label = m.group(2)        # "A", "single", "common"
+        img_id       = m.group(1)
+        panel_letter = m.group(2)
+        variant      = m.group(3) or ""
 
-        # Full crop stem — this is the JSON filename key
-        stem = Path(fname).stem         # "img11_A" or "img10_single_2"
-
-        # Which panel key to look up inside the JSON
-        if panel_label.lower() in ("single", "common"):
-            lookup_key = "main"
+        if panel_letter.lower() == "single":
+            panel_suffix = "single"
+            lookup_key   = "main"
         else:
-            lookup_key = panel_label.lower()
+            panel_suffix = f"{panel_letter.upper()}_{variant}" if variant else panel_letter.upper()
+            lookup_key   = panel_letter.lower()
 
         row: dict = {
-            "image_filename":         fname,
-            "visualization_category": "",
-            "visualization_subtype":  "",
-            "subcaption":             "",
-            "summary":                "",
+            "image_filename":          fname,
+            "image_id":                img_id,
+            "panel_suffix":            panel_suffix,
+            "variant":                 variant,
+            "json_panel":              "",
+            "visualization_category":  "",
+            "visualization_subtype":   "",
+            "subcaption":              "",
+            "summary":                 "",
+            "matched":                 False,
         }
 
-        json_obj = json_index.get(stem)
-        row_matched = False
+        json_obj = json_index.get(img_id)
         if json_obj is None:
             no_json.append(fname)
         else:
             panel_data = _build_panel_lookup(json_obj).get(lookup_key)
             if panel_data:
-                row["visualization_category"]  = panel_data.get("visualization_category", "")
-                row["visualization_subtype"]   = panel_data.get("visualization_subtype", "")
-                row["subcaption"]              = panel_data.get("subcaption", "")
-                row["summary"]                 = panel_data.get("summary", "")
-                row_matched=True
+                row["json_panel"]             = panel_data.get("panel", "")
+                row["visualization_category"] = panel_data.get("visualization_category", "")
+                row["visualization_subtype"]  = panel_data.get("visualization_subtype", "")
+                row["subcaption"]             = panel_data.get("subcaption", "")
+                row["summary"]                = panel_data.get("summary", "")
+                row["matched"]                = True
                 matched.append(fname)
             else:
                 panel_not_found.append(fname)
 
-        rows.append((row, row_matched))
+        rows.append(row)
 
     # Write CSV
     output_csv.parent.mkdir(parents=True, exist_ok=True)
@@ -188,7 +198,7 @@ def build(
     n_no_panel    = len(panel_not_found)
     n_skipped     = len(skipped_pattern)
     n_has_caption = sum(
-        1 for r, flag in rows if flag and r["subcaption"] and r["summary"]
+        1 for r in rows if r["matched"] and r["subcaption"] and r["summary"]
     )
 
     def pct(n): return n / total_rows * 100 if total_rows else 0

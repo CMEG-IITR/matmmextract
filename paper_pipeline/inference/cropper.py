@@ -6,12 +6,9 @@ Crop detected panels from images using the JSON files produced by
 
 Output naming convention
 ------------------------
-``<stem>_<label>.jpg``        — first (or only) detection with that label
-``<stem>_<label>_2.jpg``      — second detection with the same label
-``<stem>_single.jpg``         — label_name == "single", first occurrence
-``<stem>_single_2.jpg``       — label_name == "single", second occurrence
-
-These names are matched by dataset_builder's IMG_RE pattern.
+``<stem>_<label>.jpg``   — highest-confidence detection for that label.
+When multiple detections share a label, only the one with the highest
+score is saved.  These names are matched by dataset_builder's IMG_RE pattern.
 """
 
 from __future__ import annotations
@@ -115,21 +112,17 @@ def crop(
                 print(f"[cropper] ERROR opening {img_path}: {exc}")
             continue
 
-        # Track per-label counts to handle duplicates:
-        # first A → img_A.jpg, second A → img_A_2.jpg, third → img_A_3.jpg
-        label_count: dict[str, int] = {}
-
+        # Keep only the highest-confidence detection per label
+        best: dict[str, dict] = {}
         for det in data["detections"]:
+            lbl = det["label_name"]
+            if lbl not in best or det["score"] > best[lbl]["score"]:
+                best[lbl] = det
+
+        for det in best.values():
             x1, y1, x2, y2 = [int(round(v)) for v in det["bbox"]]
-            label = det["label_name"]   # e.g. "A", "B", "single", "common"
-
-            label_count[label] = label_count.get(label, 0) + 1
-            count = label_count[label]
-
-            # First occurrence: no suffix. Second+: _2, _3, ...
-            suffix = f"_{count}" if count > 1 else ""
-            out_name = f"{stem}_{label}{suffix}.jpg"
-
+            label = det["label_name"]
+            out_name = f"{stem}_{label}.jpg"
             crop = pil.crop((x1, y1, x2, y2))
             crop.save(output_dir / out_name)
             result.n_crops += 1
