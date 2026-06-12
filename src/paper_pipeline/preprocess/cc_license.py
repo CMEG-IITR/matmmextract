@@ -14,13 +14,14 @@ Notebook cells covered
 - Copy CC BY XMLs           → lives in preprocess.pipeline.copy_xmls_by_filename
 
 Detection strategies (in order):
-  1. <oa:userLicense> / <oa:openAccessInformation>  (most reliable)
-  2. <prism:copyright> / <dc:rights>
-  3. <ce:copyright> and any tag whose name contains "copyright"
-  4. <license> / <ali:license_ref> (JATS style)
-  5. Free-text scan for creativecommons.org URLs
-  5b. Free-text scan for plain "CC BY" text
-  6. © Elsevier without any CC marker → Subscription/Copyright
+1. <oa:userLicense> / <oa:openAccessInformation>  (most reliable)
+2. <prism:copyright> / <dc:rights>
+3. <ce:copyright> and any tag whose name contains "copyright"
+4. <license> / <ali:license_ref> (JATS style)
+5. Free-text scan for creativecommons.org URLs
+6. © Elsevier without any CC marker → Subscription/Copyright
+
+
 """
 
 from __future__ import annotations

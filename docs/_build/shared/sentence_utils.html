@@ -1,0 +1,341 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sentence Utilities &mdash; Paper Pipeline</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Downloader" href="downloader.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Paper Pipeline
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started.html#quick-example">Quick Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#elsevier-pipeline">Elsevier Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#springer-pipeline">Springer Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#cleaner">Cleaner</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api.html#openalex">OpenAlex</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../openalex/fetch.html">Fetch Papers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../openalex/fetch.html#paper-pipeline-openalex-fetcher">paper_pipeline.openalex.fetcher</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../openalex/fetch.html#why-openalex-instead-of-scopus-csvs">Why OpenAlex instead of Scopus CSVs?</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../openalex/fetch.html#key-filters-supported">Key filters supported</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../openalex/fetch.html#paper_pipeline.openalex.fetcher.FetchResult"><code class="docutils literal notranslate"><span class="pre">FetchResult</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../openalex/fetch.html#paper_pipeline.openalex.fetcher.fetch"><code class="docutils literal notranslate"><span class="pre">fetch()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../openalex/fetch.html#paper_pipeline.openalex.fetcher.fetch_elsevier"><code class="docutils literal notranslate"><span class="pre">fetch_elsevier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../openalex/fetch.html#paper_pipeline.openalex.fetcher.fetch_springer"><code class="docutils literal notranslate"><span class="pre">fetch_springer()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#elsevier">Elsevier</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../elsevier/fetch.html">Fetch Papers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../elsevier/fetch.html#paper-pipeline-elsevier-fetcher">paper_pipeline.elsevier.fetcher</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../elsevier/fetch.html#environment-variables">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../elsevier/fetch.html#paper_pipeline.elsevier.fetcher.FetchResult"><code class="docutils literal notranslate"><span class="pre">FetchResult</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../elsevier/fetch.html#paper_pipeline.elsevier.fetcher.fetch_all"><code class="docutils literal notranslate"><span class="pre">fetch_all()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../elsevier/fetch.html#paper_pipeline.elsevier.fetcher.fetch_fulltext_xml"><code class="docutils literal notranslate"><span class="pre">fetch_fulltext_xml()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../elsevier/fetch.html#paper_pipeline.elsevier.fetcher.get_pii_from_doi"><code class="docutils literal notranslate"><span class="pre">get_pii_from_doi()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../elsevier/extract.html">Extract Figures</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../elsevier/extract.html#paper_pipeline.elsevier.extractor.build_image_map"><code class="docutils literal notranslate"><span class="pre">build_image_map()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../elsevier/extract.html#paper_pipeline.elsevier.extractor.extract_all"><code class="docutils literal notranslate"><span class="pre">extract_all()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../elsevier/extract.html#paper_pipeline.elsevier.extractor.extract_figures"><code class="docutils literal notranslate"><span class="pre">extract_figures()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../elsevier/extract.html#paper_pipeline.elsevier.extractor.extract_reference_sentences"><code class="docutils literal notranslate"><span class="pre">extract_reference_sentences()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../elsevier/extract.html#paper_pipeline.elsevier.extractor.get_merged_paragraphs"><code class="docutils literal notranslate"><span class="pre">get_merged_paragraphs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../elsevier/extract.html#paper_pipeline.elsevier.extractor.process_file"><code class="docutils literal notranslate"><span class="pre">process_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../elsevier/extract.html#paper_pipeline.elsevier.extractor.resolve_image_url"><code class="docutils literal notranslate"><span class="pre">resolve_image_url()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../elsevier/download.html">Download Images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../elsevier/download.html#paper_pipeline.elsevier.downloader.build_candidate_urls"><code class="docutils literal notranslate"><span class="pre">build_candidate_urls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../elsevier/download.html#paper_pipeline.elsevier.downloader.download_all"><code class="docutils literal notranslate"><span class="pre">download_all()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#springer">Springer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../springer/fetch.html">Fetch Papers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../springer/fetch.html#paper-pipeline-springer-fetcher">paper_pipeline.springer.fetcher</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../springer/fetch.html#environment-variables">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../springer/fetch.html#paper_pipeline.springer.fetcher.FetchResult"><code class="docutils literal notranslate"><span class="pre">FetchResult</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../springer/fetch.html#paper_pipeline.springer.fetcher.fetch_all"><code class="docutils literal notranslate"><span class="pre">fetch_all()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../springer/fetch.html#paper_pipeline.springer.fetcher.fetch_fulltext_xml"><code class="docutils literal notranslate"><span class="pre">fetch_fulltext_xml()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../springer/extract.html">Extract Figures</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../springer/extract.html#paper_pipeline.springer.extractor.extract_all"><code class="docutils literal notranslate"><span class="pre">extract_all()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../springer/extract.html#paper_pipeline.springer.extractor.extract_figures"><code class="docutils literal notranslate"><span class="pre">extract_figures()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../springer/extract.html#paper_pipeline.springer.extractor.extract_reference_sentences"><code class="docutils literal notranslate"><span class="pre">extract_reference_sentences()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../springer/extract.html#paper_pipeline.springer.extractor.process_file"><code class="docutils literal notranslate"><span class="pre">process_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../springer/extract.html#paper_pipeline.springer.extractor.resolve_image_url"><code class="docutils literal notranslate"><span class="pre">resolve_image_url()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../springer/download.html">Download Images</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../springer/download.html#paper_pipeline.springer.downloader.build_candidate_urls"><code class="docutils literal notranslate"><span class="pre">build_candidate_urls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../springer/download.html#paper_pipeline.springer.downloader.download_all"><code class="docutils literal notranslate"><span class="pre">download_all()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#inference">Inference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../inference/cleaner.html">Cleaner</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../inference/cleaner.html#paper-pipeline-inference-cleaner">paper_pipeline.inference.cleaner</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../inference/cleaner.html#kept">KEPT</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../inference/cleaner.html#deleted">DELETED</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../inference/cleaner.html#paper_pipeline.inference.cleaner.CleanResult"><code class="docutils literal notranslate"><span class="pre">CleanResult</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../inference/cleaner.html#paper_pipeline.inference.cleaner.clean"><code class="docutils literal notranslate"><span class="pre">clean()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../inference/detector.html">Detector</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../inference/detector.html#paper-pipeline-inference-detector">paper_pipeline.inference.detector</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../inference/detector.html#flow">Flow</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../inference/detector.html#paper_pipeline.inference.detector.DetectionResult"><code class="docutils literal notranslate"><span class="pre">DetectionResult</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../inference/detector.html#paper_pipeline.inference.detector.detect"><code class="docutils literal notranslate"><span class="pre">detect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../inference/detector.html#paper_pipeline.inference.detector.resolve_weights"><code class="docutils literal notranslate"><span class="pre">resolve_weights()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../inference/cropper.html">Cropper</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../inference/cropper.html#paper-pipeline-inference-cropper">paper_pipeline.inference.cropper</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../inference/cropper.html#output-naming-convention">Output naming convention</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../inference/cropper.html#paper_pipeline.inference.cropper.CropResult"><code class="docutils literal notranslate"><span class="pre">CropResult</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../inference/cropper.html#paper_pipeline.inference.cropper.crop"><code class="docutils literal notranslate"><span class="pre">crop()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../inference/captioner.html">Captioner</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../inference/captioner.html#paper-pipeline-inference-captioner">paper_pipeline.inference.captioner</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../inference/captioner.html#input">Input</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../inference/captioner.html#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../inference/captioner.html#paper_pipeline.inference.captioner.CaptionResult"><code class="docutils literal notranslate"><span class="pre">CaptionResult</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../inference/captioner.html#paper_pipeline.inference.captioner.captioner"><code class="docutils literal notranslate"><span class="pre">captioner()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../inference/captioner_azure.html">Azure Captioner</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../inference/captioner_azure.html#paper-pipeline-inference-captioner-azure">paper_pipeline.inference.captioner_azure</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../inference/captioner_azure.html#input-csv-columns-required">Input CSV columns required</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../inference/captioner_azure.html#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../inference/captioner_azure.html#paper_pipeline.inference.captioner_azure.CaptionResult"><code class="docutils literal notranslate"><span class="pre">CaptionResult</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../inference/captioner_azure.html#paper_pipeline.inference.captioner_azure.captioner"><code class="docutils literal notranslate"><span class="pre">captioner()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../inference/dataset_builder.html">Dataset Builder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../inference/dataset_builder.html#paper-pipeline-inference-dataset-builder">paper_pipeline.inference.dataset_builder</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../inference/dataset_builder.html#json-lookup-key">JSON lookup key</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../inference/dataset_builder.html#filename-pattern-matched">Filename pattern matched</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../inference/dataset_builder.html#output-columns">Output columns</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../inference/dataset_builder.html#paper_pipeline.inference.dataset_builder.BuildResult"><code class="docutils literal notranslate"><span class="pre">BuildResult</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../inference/dataset_builder.html#paper_pipeline.inference.dataset_builder.build"><code class="docutils literal notranslate"><span class="pre">build()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../inference/crop_csv_builder.html">Crop CSV Builder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../inference/crop_csv_builder.html#paper-pipeline-inference-crop-csv-builder">paper_pipeline.inference.crop_csv_builder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../inference/crop_csv_builder.html#paper_pipeline.inference.crop_csv_builder.build_crop_csv"><code class="docutils literal notranslate"><span class="pre">build_crop_csv()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#preprocess">Preprocess</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../preprocess/pipeline.html">Pipeline</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../preprocess/pipeline.html#paper-pipeline-preprocess-pipeline">paper_pipeline.preprocess.pipeline</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../preprocess/pipeline.html#notebook-cells-covered">Notebook cells covered</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../preprocess/pipeline.html#paper_pipeline.preprocess.pipeline.copy_xmls_by_filename"><code class="docutils literal notranslate"><span class="pre">copy_xmls_by_filename()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../preprocess/pipeline.html#paper_pipeline.preprocess.pipeline.drop_duplicate_dois"><code class="docutils literal notranslate"><span class="pre">drop_duplicate_dois()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../preprocess/pipeline.html#paper_pipeline.preprocess.pipeline.filter_by_publisher"><code class="docutils literal notranslate"><span class="pre">filter_by_publisher()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../preprocess/pipeline.html#paper_pipeline.preprocess.pipeline.filter_open_access"><code class="docutils literal notranslate"><span class="pre">filter_open_access()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../preprocess/pipeline.html#paper_pipeline.preprocess.pipeline.find_duplicate_dois"><code class="docutils literal notranslate"><span class="pre">find_duplicate_dois()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../preprocess/pipeline.html#paper_pipeline.preprocess.pipeline.flatten_images"><code class="docutils literal notranslate"><span class="pre">flatten_images()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../preprocess/pipeline.html#paper_pipeline.preprocess.pipeline.load_csvs"><code class="docutils literal notranslate"><span class="pre">load_csvs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../preprocess/pipeline.html#paper_pipeline.preprocess.pipeline.move_xmls_by_doi"><code class="docutils literal notranslate"><span class="pre">move_xmls_by_doi()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../preprocess/pipeline.html#paper_pipeline.preprocess.pipeline.prune_images_without_captions"><code class="docutils literal notranslate"><span class="pre">prune_images_without_captions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../preprocess/pipeline.html#paper_pipeline.preprocess.pipeline.publisher_counts"><code class="docutils literal notranslate"><span class="pre">publisher_counts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../preprocess/pipeline.html#paper_pipeline.preprocess.pipeline.run"><code class="docutils literal notranslate"><span class="pre">run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../preprocess/pipeline.html#paper_pipeline.preprocess.pipeline.save_csv"><code class="docutils literal notranslate"><span class="pre">save_csv()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../preprocess/cc_license.html">CC License</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../preprocess/cc_license.html#paper-pipeline-preprocess-cc-license">paper_pipeline.preprocess.cc_license</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../preprocess/cc_license.html#notebook-cells-covered">Notebook cells covered</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../preprocess/cc_license.html#paper_pipeline.preprocess.cc_license.REDISTRIB_RIGHTS"><code class="docutils literal notranslate"><span class="pre">REDISTRIB_RIGHTS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../preprocess/cc_license.html#paper_pipeline.preprocess.cc_license.analyse_file"><code class="docutils literal notranslate"><span class="pre">analyse_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../preprocess/cc_license.html#paper_pipeline.preprocess.cc_license.filter_figures_cc_by"><code class="docutils literal notranslate"><span class="pre">filter_figures_cc_by()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../preprocess/cc_license.html#paper_pipeline.preprocess.cc_license.scan_directory"><code class="docutils literal notranslate"><span class="pre">scan_directory()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../api.html#shared">Shared</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="doi_utils.html">DOI Utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="doi_utils.html#paper_pipeline.shared.doi_utils.append_line"><code class="docutils literal notranslate"><span class="pre">append_line()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="doi_utils.html#paper_pipeline.shared.doi_utils.doi_to_filename"><code class="docutils literal notranslate"><span class="pre">doi_to_filename()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="doi_utils.html#paper_pipeline.shared.doi_utils.filename_to_doi"><code class="docutils literal notranslate"><span class="pre">filename_to_doi()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="doi_utils.html#paper_pipeline.shared.doi_utils.load_set"><code class="docutils literal notranslate"><span class="pre">load_set()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="downloader.html">Downloader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="downloader.html#paper-pipeline-shared-downloader">paper_pipeline.shared.downloader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="downloader.html#paper_pipeline.shared.downloader.DownloadResult"><code class="docutils literal notranslate"><span class="pre">DownloadResult</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="downloader.html#paper_pipeline.shared.downloader.append_log"><code class="docutils literal notranslate"><span class="pre">append_log()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="downloader.html#paper_pipeline.shared.downloader.download_one"><code class="docutils literal notranslate"><span class="pre">download_one()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="downloader.html#paper_pipeline.shared.downloader.extension_from_url"><code class="docutils literal notranslate"><span class="pre">extension_from_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="downloader.html#paper_pipeline.shared.downloader.load_download_log"><code class="docutils literal notranslate"><span class="pre">load_download_log()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="downloader.html#paper_pipeline.shared.downloader.next_name_allocator"><code class="docutils literal notranslate"><span class="pre">next_name_allocator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="downloader.html#paper_pipeline.shared.downloader.run_downloads"><code class="docutils literal notranslate"><span class="pre">run_downloads()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Sentence Utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#paper_pipeline.shared.sentence_utils.split_sentences"><code class="docutils literal notranslate"><span class="pre">split_sentences()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Paper Pipeline</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../api.html">API Reference</a></li>
+      <li class="breadcrumb-item active">Sentence Utilities</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-paper_pipeline.shared.sentence_utils">
+<span id="sentence-utilities"></span><h1>Sentence Utilities<a class="headerlink" href="#module-paper_pipeline.shared.sentence_utils" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="paper_pipeline.shared.sentence_utils.split_sentences">
+<span class="sig-name descname"><span class="pre">split_sentences</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/paper_pipeline/shared/sentence_utils.html#split_sentences"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#paper_pipeline.shared.sentence_utils.split_sentences" title="Link to this definition"></a></dt>
+<dd><p>Split <em>text</em> into sentences, protecting scientific abbreviations.</p>
+<p>Strategy: temporarily replace abbreviation dots with a placeholder,
+split on <code class="docutils literal notranslate"><span class="pre">[.!?]</span></code> followed by whitespace + uppercase/bracket, then
+restore the placeholder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> – Plain text to split.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Non-empty sentence strings.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">split_sentences</span><span class="p">(</span><span class="s2">&quot;As shown in Fig. 3, the yield is high. See also Fig. 4.&quot;</span><span class="p">)</span>
+<span class="go">[&#39;As shown in Fig. 3, the yield is high.&#39;, &#39;See also Fig. 4.&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="downloader.html" class="btn btn-neutral float-left" title="Downloader" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

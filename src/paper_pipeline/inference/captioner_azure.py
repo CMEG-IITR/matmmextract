@@ -10,8 +10,9 @@ Differences from :mod:`~paper_pipeline.inference.captioner` (Gemini):
 - Uses ``openai.OpenAI`` with a custom ``base_url`` pointing at Azure
 - Response format is a JSON schema dict (OpenAI structured outputs)
 - Column names differ: ``image_name`` and ``reference`` instead of
-  ``downloaded_image_name`` and ``reference_sentences``
+``downloaded_image_name`` and ``reference_sentences``
 - Retries on ``"error"`` keys in already-written JSON files
+
 
 Input CSV columns required
 --------------------------

@@ -1,7 +1,13 @@
 Paper Pipeline
 ==============
 
-.. toctree::
-   :maxdepth: 4
+Scientific paper acquisition, extraction, preprocessing,
+dataset creation, detection and caption generation.
 
-   modules
+.. toctree::
+   :maxdepth: 3
+   :caption: Documentation
+
+   getting_started
+   examples
+   api

@@ -17,7 +17,7 @@ DELETED
 - output/                   all intermediate CSVs
 - alloys_elsevier/          fetched Elsevier XMLs
 - alloys_springer/          fetched Springer XMLs
-- *.txt                     processed_dois / failed_dois resume files
+- ``*.txt``                     processed_dois / failed_dois resume files
 """
 
 from __future__ import annotations
