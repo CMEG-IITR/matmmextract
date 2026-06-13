@@ -16,9 +16,9 @@ from multimat.inference import (
 )
 
 springer_result = fetch_springer(
-    license_="cc-by",
+    license_=["cc-by", "cc-by-nc"],
     keywords=["alloy"],
-    max_results=2,
+    max_results=1,
     output_csv="output/springer_papers.csv",
     api_key="",
 )
@@ -49,7 +49,7 @@ springer_download(
 detect(
     image_dir="images/springer",
     output_dir="inference_results",
-    checkpoint="models/best.pt",
+    checkpoint="https://drive.google.com/file/d/10garsNWEdgzMGX9nyDE8dMABkU_3BYp9/view?usp=sharing",
     conf=0.6, iou=0.4, imgsz=1024,
 )
 

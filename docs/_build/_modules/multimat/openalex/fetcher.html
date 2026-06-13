@@ -341,7 +341,7 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_build_filter</span><span class="p">(</span>
     <span class="n">publisher</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">license_</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">license_</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">is_oa</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="n">from_year</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">to_year</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
@@ -355,11 +355,16 @@
     <span class="c1"># Publisher filtering is done locally after download.</span>
 
     <span class="k">if</span> <span class="n">license_</span><span class="p">:</span>
-        <span class="n">normalized</span> <span class="o">=</span> <span class="n">LICENSE_MAP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-            <span class="n">license_</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
-            <span class="n">license_</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-        <span class="p">)</span>
-        <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;primary_location.license:</span><span class="si">{</span><span class="n">normalized</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">licenses</span> <span class="o">=</span> <span class="p">[</span><span class="n">license_</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">license_</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">license_</span>
+        <span class="n">normalized</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">LICENSE_MAP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">l</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">l</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+            <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">licenses</span>
+        <span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">normalized</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;primary_location.license:</span><span class="si">{</span><span class="n">normalized</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># OpenAlex OR filter: primary_location.license:cc-by|cc-by-nc</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;primary_location.license:</span><span class="si">{</span><span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">normalized</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">from_year</span> <span class="ow">and</span> <span class="n">to_year</span><span class="p">:</span>
         <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;publication_year:</span><span class="si">{</span><span class="n">from_year</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">to_year</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -435,7 +440,7 @@
 <a class="viewcode-back" href="../../../openalex/fetch.html#multimat.openalex.fetcher.fetch">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">fetch</span><span class="p">(</span>
     <span class="n">publisher</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">license_</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s2">&quot;cc-by&quot;</span><span class="p">,</span>
+    <span class="n">license_</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s2">&quot;cc-by&quot;</span><span class="p">,</span>
     <span class="n">is_oa</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">from_year</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">to_year</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -456,8 +461,9 @@
 <span class="sd">        Publisher display name substring, e.g. ``&quot;Elsevier&quot;``,</span>
 <span class="sd">        ``&quot;Springer&quot;``, ``&quot;Wiley&quot;``.  Case-insensitive partial match.</span>
 <span class="sd">    license_:</span>
-<span class="sd">        OA license filter.  Common values: ``&quot;cc-by&quot;``, ``&quot;cc-by-nc&quot;``,</span>
-<span class="sd">        ``&quot;cc-by-nc-nd&quot;``.  Pass ``None`` to skip.</span>
+<span class="sd">        OA license filter.  Pass a single string (``&quot;cc-by&quot;``) or a list</span>
+<span class="sd">        to accept multiple licenses (``[&quot;cc-by&quot;, &quot;cc-by-nc&quot;]``).</span>
+<span class="sd">        Pass ``None`` to skip license filtering.</span>
 <span class="sd">    is_oa:</span>
 <span class="sd">        Restrict to open-access works (default ``True``).</span>
 <span class="sd">    from_year / to_year:</span>
@@ -645,7 +651,7 @@
 <div class="viewcode-block" id="fetch_elsevier">
 <a class="viewcode-back" href="../../../openalex/fetch.html#multimat.openalex.fetcher.fetch_elsevier">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">fetch_elsevier</span><span class="p">(</span>
-    <span class="n">license_</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s2">&quot;cc-by&quot;</span><span class="p">,</span>
+    <span class="n">license_</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s2">&quot;cc-by&quot;</span><span class="p">,</span>
     <span class="n">keywords</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">from_year</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">to_year</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -674,7 +680,7 @@
 <div class="viewcode-block" id="fetch_springer">
 <a class="viewcode-back" href="../../../openalex/fetch.html#multimat.openalex.fetcher.fetch_springer">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">fetch_springer</span><span class="p">(</span>
-    <span class="n">license_</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s2">&quot;cc-by&quot;</span><span class="p">,</span>
+    <span class="n">license_</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s2">&quot;cc-by&quot;</span><span class="p">,</span>
     <span class="n">keywords</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">from_year</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">to_year</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -710,8 +716,8 @@
     <span class="p">)</span>
     <span class="n">p</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--publisher&quot;</span><span class="p">,</span>    <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Publisher name substring, e.g. &#39;Elsevier&#39;&quot;</span><span class="p">)</span>
-    <span class="n">p</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--license&quot;</span><span class="p">,</span>      <span class="n">default</span><span class="o">=</span><span class="s2">&quot;cc-by&quot;</span><span class="p">,</span>
-                   <span class="n">help</span><span class="o">=</span><span class="s2">&quot;OA license filter, e.g. cc-by, cc-by-nc (default: cc-by)&quot;</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--license&quot;</span><span class="p">,</span>      <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;cc-by&quot;</span><span class="p">],</span> <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span>
+                   <span class="n">help</span><span class="o">=</span><span class="s2">&quot;One or more OA license filters, e.g. --license cc-by cc-by-nc&quot;</span><span class="p">)</span>
     <span class="n">p</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--no-oa&quot;</span><span class="p">,</span>        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
                    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Do not restrict to open-access works&quot;</span><span class="p">)</span>
     <span class="n">p</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--from-year&quot;</span><span class="p">,</span>    <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
@@ -731,7 +737,7 @@
     <span class="n">args</span> <span class="o">=</span> <span class="n">_parse_args</span><span class="p">()</span>
     <span class="n">fetch</span><span class="p">(</span>
         <span class="n">publisher</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">publisher</span><span class="p">,</span>
-        <span class="n">license_</span><span class="o">=</span><span class="kc">None</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">license</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;none&quot;</span> <span class="k">else</span> <span class="n">args</span><span class="o">.</span><span class="n">license</span><span class="p">,</span>
+        <span class="n">license_</span><span class="o">=</span><span class="kc">None</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">license</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;none&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">license</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">license</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">args</span><span class="o">.</span><span class="n">license</span><span class="p">),</span>
         <span class="n">is_oa</span><span class="o">=</span><span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">no_oa</span><span class="p">,</span>
         <span class="n">from_year</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">from_year</span><span class="p">,</span>
         <span class="n">to_year</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">to_year</span><span class="p">,</span>

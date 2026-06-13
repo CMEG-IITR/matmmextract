@@ -300,7 +300,7 @@
 <span class="linenos">45</span><span class="n">detect</span><span class="p">(</span>
 <span class="linenos">46</span>    <span class="n">image_dir</span><span class="o">=</span><span class="s2">&quot;images/elsevier&quot;</span><span class="p">,</span>
 <span class="linenos">47</span>    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;inference_results&quot;</span><span class="p">,</span>
-<span class="linenos">48</span>    <span class="n">checkpoint</span><span class="o">=</span><span class="s2">&quot;best.pt&quot;</span><span class="p">,</span>
+<span class="linenos">48</span>    <span class="n">checkpoint</span><span class="o">=</span><span class="s2">&quot;https://drive.google.com/file/d/10garsNWEdgzMGX9nyDE8dMABkU_3BYp9/view?usp=sharing&quot;</span><span class="p">,</span>
 <span class="linenos">49</span>    <span class="n">conf</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">iou</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">imgsz</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
 <span class="linenos">50</span><span class="p">)</span>
 <span class="linenos">51</span>
@@ -429,9 +429,9 @@
 <span class="linenos">16</span><span class="p">)</span>
 <span class="linenos">17</span>
 <span class="linenos">18</span><span class="n">springer_result</span> <span class="o">=</span> <span class="n">fetch_springer</span><span class="p">(</span>
-<span class="linenos">19</span>    <span class="n">license_</span><span class="o">=</span><span class="s2">&quot;cc-by&quot;</span><span class="p">,</span>
+<span class="linenos">19</span>    <span class="n">license_</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;cc-by&quot;</span><span class="p">,</span> <span class="s2">&quot;cc-by-nc&quot;</span><span class="p">],</span>
 <span class="linenos">20</span>    <span class="n">keywords</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;alloy&quot;</span><span class="p">],</span>
-<span class="linenos">21</span>    <span class="n">max_results</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="linenos">21</span>    <span class="n">max_results</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
 <span class="linenos">22</span>    <span class="n">output_csv</span><span class="o">=</span><span class="s2">&quot;output/springer_papers.csv&quot;</span><span class="p">,</span>
 <span class="linenos">23</span>    <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
 <span class="linenos">24</span><span class="p">)</span>
@@ -462,7 +462,7 @@
 <span class="linenos">49</span><span class="n">detect</span><span class="p">(</span>
 <span class="linenos">50</span>    <span class="n">image_dir</span><span class="o">=</span><span class="s2">&quot;images/springer&quot;</span><span class="p">,</span>
 <span class="linenos">51</span>    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;inference_results&quot;</span><span class="p">,</span>
-<span class="linenos">52</span>    <span class="n">checkpoint</span><span class="o">=</span><span class="s2">&quot;models/best.pt&quot;</span><span class="p">,</span>
+<span class="linenos">52</span>    <span class="n">checkpoint</span><span class="o">=</span><span class="s2">&quot;https://drive.google.com/file/d/10garsNWEdgzMGX9nyDE8dMABkU_3BYp9/view?usp=sharing&quot;</span><span class="p">,</span>
 <span class="linenos">53</span>    <span class="n">conf</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">iou</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">imgsz</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
 <span class="linenos">54</span><span class="p">)</span>
 <span class="linenos">55</span>
