@@ -1,5 +1,5 @@
-Extract Figures
-===============
+Elsevier Extract
+================
 
 .. automodule:: multimat.elsevier.extractor
    :members:

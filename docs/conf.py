@@ -19,21 +19,17 @@ autosummary_generate = True
 add_module_names = False
 toc_object_entries_show_parents = "hide"
 
-html_theme = "sphinx_rtd_theme"
+templates_path = ["_templates"]
+exclude_patterns = ["_build"]
+
+html_theme = "furo"
 html_title = "MultiMat"
 
-html_theme_options = {
-    "collapse_navigation": False,
-    "sticky_navigation": True,
-    "navigation_depth": 10,
-    "titles_only": False,
-}
+html_show_sourcelink = False
 
-html_sidebars = {
-    "**": [
-        "searchbox.html",
-        "globaltoc.html",
-    ]
+autodoc_default_options = {
+    "members": True,
+    "undoc-members": False,
 }
 
 def skip_member(app, what, name, obj, skip, options):

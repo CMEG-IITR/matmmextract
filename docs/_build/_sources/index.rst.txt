@@ -5,8 +5,7 @@ Scientific paper acquisition, extraction, preprocessing,
 dataset creation, detection and caption generation.
 
 .. toctree::
-   :maxdepth: 3
-   :caption: Documentation
+   :maxdepth: 2
 
    getting_started
    examples

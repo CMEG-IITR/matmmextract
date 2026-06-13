@@ -1,4 +1,7 @@
-from .captioner import CaptionResult, captioner
+from .captioner_gemini import (
+    CaptionResult as GeminiCaptionResult,
+    captioner as gemini_captioner,
+)
 from .captioner_azure import (
     CaptionResult as AzureCaptionResult,
     captioner as azure_captioner,
@@ -10,8 +13,8 @@ from .detector import DetectionResult, detect
 from .crop_csv_builder import build_crop_csv
 
 __all__ = [
-    "CaptionResult",
-    "captioner",
+    "GeminiCaptionResult",
+    "gemini_captioner",
     "AzureCaptionResult",
     "azure_captioner",
     "CleanResult",

@@ -1,5 +1,5 @@
-Download Images
-===============
+Elsevier Download
+=================
 
 .. automodule:: multimat.elsevier.downloader
    :members:

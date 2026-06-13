@@ -1,10 +1,9 @@
 """
-multimat.inference.captioner
+multimat.inference.captioner_gemini
 ====================================
 Generate per-panel sub-captions using Gemini, from figure captions and
 reference sentences extracted during the XML extraction step.
 
-Ported from ``gen_subcaption_single.py`` — globals → parameters.
 
 Input
 -----

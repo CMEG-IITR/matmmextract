@@ -1,5 +1,5 @@
-Download Images
-===============
+Springer Download
+=================
 
 .. automodule:: multimat.springer.downloader
    :members:
