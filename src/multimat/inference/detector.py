@@ -69,8 +69,85 @@ def find_images(folder: str | Path) -> list[str]:
     ]
 
 
-def resolve_weights(checkpoint: str | Path) -> str:
-    """Accept a direct .pt path or a folder containing best.pt / last.pt."""
+def _is_gdrive_url(s: str) -> bool:
+    return "drive.google.com" in s or "docs.google.com" in s
+
+
+def _is_url(s: str) -> bool:
+    return str(s).startswith(("http://", "https://"))
+
+
+def _download_gdrive(url: str, cache_dir: str | Path = ".weights_cache") -> str:
+    """Download a Google Drive file and return the local path.
+
+    Accepts any of:
+    - https://drive.google.com/file/d/<ID>/view?usp=sharing
+    - https://drive.google.com/open?id=<ID>
+    - https://drive.google.com/uc?id=<ID>
+    """
+    try:
+        import gdown
+    except ImportError:
+        raise ImportError("gdown is required for Google Drive downloads: pip install gdown")
+
+    import re
+    # Extract file ID from any Drive URL format
+    patterns = [
+        r"/file/d/([a-zA-Z0-9_-]+)",
+        r"[?&]id=([a-zA-Z0-9_-]+)",
+        r"open\?id=([a-zA-Z0-9_-]+)",
+    ]
+    file_id = None
+    for pat in patterns:
+        m = re.search(pat, url)
+        if m:
+            file_id = m.group(1)
+            break
+
+    if not file_id:
+        raise ValueError(f"Could not extract Google Drive file ID from URL: {url}")
+
+    cache_dir = Path(cache_dir)
+    cache_dir.mkdir(parents=True, exist_ok=True)
+
+    # Check if already downloaded
+    existing = list(cache_dir.glob(f"{file_id}*.pt"))
+    if existing:
+        print(f"[detector] using cached weights: {existing[0]}")
+        return str(existing[0])
+
+    dest = cache_dir / f"{file_id}.pt"
+    print(f"[detector] downloading from Google Drive (id={file_id}) → {dest}")
+    gdown.download(id=file_id, output=str(dest), quiet=False)
+
+    if not dest.exists():
+        raise RuntimeError(f"Download failed — file not found at {dest}")
+
+    return str(dest)
+
+
+def resolve_weights(checkpoint: str | Path, cache_dir: str | Path = ".weights_cache") -> str:
+    """Resolve weights to a local .pt path.
+
+    Accepts:
+    - A direct local .pt file path
+    - A local directory containing best.pt / last.pt
+    - A Google Drive share URL (downloaded and cached in *cache_dir*)
+    """
+    s = str(checkpoint)
+
+    # Google Drive URL
+    if _is_gdrive_url(s):
+        return _download_gdrive(s, cache_dir=cache_dir)
+
+    # Other URL — not supported yet
+    if _is_url(s):
+        raise ValueError(
+            f"URL '{s}' is not a Google Drive link. "
+            f"Only Google Drive URLs are currently supported."
+        )
+
+    # Local path
     p = Path(checkpoint)
     if p.is_file() and p.suffix == ".pt":
         return str(p)
@@ -101,6 +178,7 @@ def detect(
     device: str = "",
     id2label: dict[int, str] | None = None,
     write_summary: bool = True,
+    weights_cache_dir: str | Path = ".weights_cache",
     verbose: bool = True,
 ) -> DetectionResult:
     """Run YOLO panel detection on every image in *image_dir*.
@@ -113,8 +191,11 @@ def detect(
         Directory where one ``.json`` per image is written, plus
         ``_summary.json`` containing all records combined.
     checkpoint:
-        Path to a YOLO ``.pt`` file, or a directory containing
-        ``best.pt`` / ``last.pt``.
+        Path to a YOLO ``.pt`` file, a directory containing
+        ``best.pt`` / ``last.pt``, or a Google Drive share URL
+        (e.g. ``https://drive.google.com/file/d/<ID>/view``).
+    weights_cache_dir:
+        Local directory to cache downloaded weights (default ``.weights_cache``).
     conf:
         Confidence threshold (default 0.6).
     iou:
@@ -144,7 +225,7 @@ def detect(
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    weights = resolve_weights(checkpoint)
+    weights = resolve_weights(checkpoint, cache_dir=weights_cache_dir)
     label_map = id2label if id2label is not None else ID2LABEL
 
     if verbose:

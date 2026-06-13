@@ -16,7 +16,7 @@ DEFAULT_CSV = "springer_figure_details.csv"
 DEFAULT_OUTPUT_DIR = "springer_images_flat"
 DEFAULT_OUTPUT_CSV = "springer_figure_details_with_images.csv"
 DEFAULT_LOG_FILE = "download_log_springer.csv"
-DEFAULT_NAME_PREFIX = "alloy_img"
+DEFAULT_NAME_PREFIX = "img"
 DEFAULT_MAX_WORKERS = 6
 
 
