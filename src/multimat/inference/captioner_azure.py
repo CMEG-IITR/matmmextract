@@ -4,9 +4,8 @@ multimat.inference.captioner_azure
 Generate per-panel sub-captions using Azure-hosted models via the
 OpenAI-compatible API (Mistral, Llama, GPT, etc.).
 
-Ported from ``gen_subcaption_azure.py`` — globals → parameters.
 
-Differences from :mod:`~multimat.inference.captioner` (Gemini):
+Differences from :mod:`~multimat.inference.captioner_gemini` (Gemini):
 - Uses ``openai.OpenAI`` with a custom ``base_url`` pointing at Azure
 - Response format is a JSON schema dict (OpenAI structured outputs)
 - Column names differ: ``image_name`` and ``reference`` instead of
@@ -47,10 +46,10 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 # ---------------------------------------------------------------------------
-# Taxonomy  (shared with captioner.py — kept here to avoid circular imports)
+# Taxonomy  (shared with captioner_gemini.py — kept here to avoid circular imports)
 # ---------------------------------------------------------------------------
 
-from multimat.inference.captioner import (
+from multimat.inference.captioner_gemini import (
     VISUALIZATION_CATEGORIES,
     SUBTYPES_BY_CATEGORY,
     _TAXONOMY_BLOCK,

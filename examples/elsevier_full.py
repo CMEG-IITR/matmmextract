@@ -16,7 +16,7 @@ elsevier_result = fetch_elsevier(
     from_year=2020, to_year=2024,
     max_results=1,
     output_csv="output/elsevier_papers.csv",
-    api_key="",   # optional, gets faster rate limit
+    api_key="Tt2Kq8tyf5se3o2cO0onep",   # optional, gets faster rate limit
 )
 
 elsevier_df = load_csvs(["output/elsevier_papers.csv"])
