@@ -89,7 +89,7 @@ class FetchResult:
 
 def _build_filter(
     publisher: str | None,
-    license_: str | None,
+    license_: str | list[str] | None,
     is_oa: bool,
     from_year: int | None,
     to_year: int | None,
@@ -103,11 +103,16 @@ def _build_filter(
     # Publisher filtering is done locally after download.
 
     if license_:
-        normalized = LICENSE_MAP.get(
-            license_.lower().strip(),
-            license_.lower().strip()
-        )
-        parts.append(f"primary_location.license:{normalized}")
+        licenses = [license_] if isinstance(license_, str) else license_
+        normalized = [
+            LICENSE_MAP.get(l.lower().strip(), l.lower().strip())
+            for l in licenses
+        ]
+        if len(normalized) == 1:
+            parts.append(f"primary_location.license:{normalized[0]}")
+        else:
+            # OpenAlex OR filter: primary_location.license:cc-by|cc-by-nc
+            parts.append(f"primary_location.license:{'|'.join(normalized)}")
 
     if from_year and to_year:
         parts.append(f"publication_year:{from_year}-{to_year}")
@@ -181,7 +186,7 @@ def _parse_work(work: dict) -> dict:
 
 def fetch(
     publisher: str | None = None,
-    license_: str | None = "cc-by",
+    license_: str | list[str] | None = "cc-by",
     is_oa: bool = True,
     from_year: int | None = None,
     to_year: int | None = None,
@@ -202,8 +207,9 @@ def fetch(
         Publisher display name substring, e.g. ``"Elsevier"``,
         ``"Springer"``, ``"Wiley"``.  Case-insensitive partial match.
     license_:
-        OA license filter.  Common values: ``"cc-by"``, ``"cc-by-nc"``,
-        ``"cc-by-nc-nd"``.  Pass ``None`` to skip.
+        OA license filter.  Pass a single string (``"cc-by"``) or a list
+        to accept multiple licenses (``["cc-by", "cc-by-nc"]``).
+        Pass ``None`` to skip license filtering.
     is_oa:
         Restrict to open-access works (default ``True``).
     from_year / to_year:
@@ -388,7 +394,7 @@ def fetch(
 # ---------------------------------------------------------------------------
 
 def fetch_elsevier(
-    license_: str | None = "cc-by",
+    license_: str | list[str] | None = "cc-by",
     keywords: list[str] | None = None,
     from_year: int | None = None,
     to_year: int | None = None,
@@ -414,7 +420,7 @@ def fetch_elsevier(
 
 
 def fetch_springer(
-    license_: str | None = "cc-by",
+    license_: str | list[str] | None = "cc-by",
     keywords: list[str] | None = None,
     from_year: int | None = None,
     to_year: int | None = None,
@@ -449,8 +455,8 @@ def _parse_args() -> argparse.Namespace:
     )
     p.add_argument("--publisher",    default=None,
                    help="Publisher name substring, e.g. 'Elsevier'")
-    p.add_argument("--license",      default="cc-by",
-                   help="OA license filter, e.g. cc-by, cc-by-nc (default: cc-by)")
+    p.add_argument("--license",      default=["cc-by"], nargs="+",
+                   help="One or more OA license filters, e.g. --license cc-by cc-by-nc")
     p.add_argument("--no-oa",        action="store_true",
                    help="Do not restrict to open-access works")
     p.add_argument("--from-year",    type=int, default=None)
@@ -470,7 +476,7 @@ def main() -> None:
     args = _parse_args()
     fetch(
         publisher=args.publisher,
-        license_=None if args.license.lower() == "none" else args.license,
+        license_=None if args.license == ["none"] else (args.license[0] if len(args.license) == 1 else args.license),
         is_oa=not args.no_oa,
         from_year=args.from_year,
         to_year=args.to_year,

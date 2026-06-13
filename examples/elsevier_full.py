@@ -45,7 +45,7 @@ elsevier_download(
 detect(
     image_dir="images/elsevier",
     output_dir="inference_results",
-    checkpoint="best.pt",
+    checkpoint="https://drive.google.com/file/d/10garsNWEdgzMGX9nyDE8dMABkU_3BYp9/view?usp=sharing",
     conf=0.6, iou=0.4, imgsz=1024,
 )
 
