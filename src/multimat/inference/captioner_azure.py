@@ -195,6 +195,9 @@ def captioner(
         Re-generate even if output JSON already exists and has no error.
     image_name_col / caption_col / reference_col:
         Column name overrides for non-standard CSVs.
+    requests_per_minute:
+        If set, throttle API calls to this rate by sleeping between requests.
+        If ``None`` (default), no extra throttling beyond retry back-off.
     verbose:
         Print progress.
 
@@ -215,6 +218,9 @@ def captioner(
 
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
+
+    _min_interval = 60.0 / requests_per_minute if requests_per_minute else None
+    _last_request_time = [0.0]
 
     client = OpenAI(base_url=azure_endpoint, api_key=api_key)
 
@@ -315,6 +321,12 @@ def captioner(
         parsed = None
         for attempt in range(max_retries):
             try:
+                if _min_interval is not None:
+                    import time as _time
+                    elapsed = _time.monotonic() - _last_request_time[0]
+                    if elapsed < _min_interval:
+                        _time.sleep(_min_interval - elapsed)
+                _last_request_time[0] = _time.monotonic() if _min_interval else 0.0
                 response = client.chat.completions.create(
                     model=model_name,
                     messages=[{"role": "user", "content": prompt}],

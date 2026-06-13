@@ -186,6 +186,7 @@ def captioner(
     max_tokens: int = 4096,
     max_retries: int = 4,
     overwrite: bool = False,
+    requests_per_minute: int | None = None,
     verbose: bool = True,
 ) -> CaptionResult:
     """Generate sub-captions for every successfully downloaded figure.
@@ -207,6 +208,9 @@ def captioner(
         Retry attempts on API error.
     overwrite:
         Re-generate even if the output JSON already exists.
+    requests_per_minute:
+        If set, throttle API calls to this rate by sleeping between requests.
+        If ``None`` (default), no extra throttling beyond retry back-off.
     verbose:
         Print progress.
 
@@ -230,6 +234,9 @@ def captioner(
 
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
+
+    _min_interval = 60.0 / requests_per_minute if requests_per_minute else None
+    _last_request_time = [0.0]
 
     client = genai.Client(api_key=api_key)
 
@@ -324,6 +331,12 @@ def captioner(
         parsed = None
         for attempt in range(max_retries):
             try:
+                if _min_interval is not None:
+                    import time as _time
+                    elapsed = _time.monotonic() - _last_request_time[0]
+                    if elapsed < _min_interval:
+                        _time.sleep(_min_interval - elapsed)
+                _last_request_time[0] = _time.monotonic() if _min_interval else 0.0
                 response = client.models.generate_content(
                     model=model_name,
                     contents=prompt,
@@ -383,6 +396,7 @@ def main() -> None:
         model_name=args.model,
         max_tokens=args.max_tokens,
         overwrite=args.overwrite,
+        requests_per_minute=args.rpm,
     )
 
 

@@ -332,6 +332,8 @@ OpenAI-compatible API (Mistral, Llama, GPT, etc.).</p>
 <li><p><strong>max_retries</strong> – Retry attempts on API error or existing <code class="docutils literal notranslate"><span class="pre">&quot;error&quot;</span></code> JSON.</p></li>
 <li><p><strong>overwrite</strong> – Re-generate even if output JSON already exists and has no error.</p></li>
 <li><p><strong>reference_col</strong> (<em>image_name_col / caption_col /</em>) – Column name overrides for non-standard CSVs.</p></li>
+<li><p><strong>requests_per_minute</strong> – If set, throttle API calls to this rate by sleeping between requests.
+If <code class="docutils literal notranslate"><span class="pre">None</span></code> (default), no extra throttling beyond retry back-off.</p></li>
 <li><p><strong>verbose</strong> – Print progress.</p></li>
 </ul>
 </dd>
