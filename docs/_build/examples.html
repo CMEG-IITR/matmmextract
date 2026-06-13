@@ -251,8 +251,8 @@
         <article role="main" id="furo-main-content">
           <section id="examples">
 <h1>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h1>
-<section id="elsevier-full-pipeline">
-<h2>Elsevier Full Pipeline<a class="headerlink" href="#elsevier-full-pipeline" title="Link to this heading">¶</a></h2>
+<section id="elsevier-full-pipeline-openalex-elsevier-detection-azure-dataset">
+<h2>Elsevier Full Pipeline (OpenAlex → Elsevier → Detection → Azure → Dataset)<a class="headerlink" href="#elsevier-full-pipeline-openalex-elsevier-detection-azure-dataset" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.preprocess.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_csvs</span>
 <span class="linenos"> 2</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.inference.detector</span><span class="w"> </span><span class="kn">import</span> <span class="n">detect</span>
 <span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.inference.cropper</span><span class="w"> </span><span class="kn">import</span> <span class="n">crop</span>
@@ -271,7 +271,7 @@
 <span class="linenos">16</span>    <span class="n">from_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span> <span class="n">to_year</span><span class="o">=</span><span class="mi">2024</span><span class="p">,</span>
 <span class="linenos">17</span>    <span class="n">max_results</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
 <span class="linenos">18</span>    <span class="n">output_csv</span><span class="o">=</span><span class="s2">&quot;output/elsevier_papers.csv&quot;</span><span class="p">,</span>
-<span class="linenos">19</span>    <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;Tt2Kq8tyf5se3o2cO0onep&quot;</span><span class="p">,</span>   <span class="c1"># optional, gets faster rate limit</span>
+<span class="linenos">19</span>    <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
 <span class="linenos">20</span><span class="p">)</span>
 <span class="linenos">21</span>
 <span class="linenos">22</span><span class="n">elsevier_df</span> <span class="o">=</span> <span class="n">load_csvs</span><span class="p">([</span><span class="s2">&quot;output/elsevier_papers.csv&quot;</span><span class="p">])</span>
@@ -340,8 +340,8 @@
 </pre></div>
 </div>
 </section>
-<section id="elsevier-scopus-workflow">
-<h2>Elsevier + Scopus Workflow<a class="headerlink" href="#elsevier-scopus-workflow" title="Link to this heading">¶</a></h2>
+<section id="elsevier-from-scopus-export-scopus-elsevier-detection-azure-dataset">
+<h2>Elsevier from Scopus Export (Scopus → Elsevier → Detection → Azure → Dataset)<a class="headerlink" href="#elsevier-from-scopus-export-scopus-elsevier-detection-azure-dataset" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 <span class="linenos"> 2</span>    <span class="n">load_csvs</span><span class="p">,</span>
 <span class="linenos"> 3</span>    <span class="n">drop_duplicate_dois</span><span class="p">,</span>
@@ -409,8 +409,8 @@
 </pre></div>
 </div>
 </section>
-<section id="springer-full-pipeline">
-<h2>Springer Full Pipeline<a class="headerlink" href="#springer-full-pipeline" title="Link to this heading">¶</a></h2>
+<section id="springer-full-pipeline-openalex-springer-detection-gemini-dataset">
+<h2>Springer Full Pipeline (OpenAlex → Springer → Detection → Gemini → Dataset)<a class="headerlink" href="#springer-full-pipeline-openalex-springer-detection-gemini-dataset" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.openalex.fetcher</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_springer</span>
 <span class="linenos"> 2</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.preprocess.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_csvs</span>
 <span class="linenos"> 3</span>
@@ -477,28 +477,23 @@
 <span class="linenos">64</span><span class="p">)</span>
 <span class="linenos">65</span>
 <span class="linenos">66</span><span class="c1"># Step 10: generate sub-captions via Azure</span>
-<span class="linenos">67</span><span class="n">azure_caption</span><span class="p">(</span>
+<span class="linenos">67</span><span class="n">gemini_caption</span><span class="p">(</span>
 <span class="linenos">68</span>    <span class="n">csv_path</span><span class="o">=</span><span class="s2">&quot;output/crops_for_captioning.csv&quot;</span><span class="p">,</span>
 <span class="linenos">69</span>    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;subcaptions&quot;</span><span class="p">,</span>
 <span class="linenos">70</span>    <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="linenos">71</span>    <span class="n">azure_endpoint</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="linenos">72</span>    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;Mistral-Large-3&quot;</span><span class="p">,</span>
-<span class="linenos">73</span>    <span class="n">image_name_col</span><span class="o">=</span><span class="s2">&quot;downloaded_image_name&quot;</span><span class="p">,</span>   <span class="c1"># matches crops_for_captioning.csv</span>
-<span class="linenos">74</span>    <span class="n">caption_col</span><span class="o">=</span><span class="s2">&quot;caption&quot;</span><span class="p">,</span>
-<span class="linenos">75</span>    <span class="n">reference_col</span><span class="o">=</span><span class="s2">&quot;reference_sentences&quot;</span><span class="p">,</span>
-<span class="linenos">76</span><span class="p">)</span>
-<span class="linenos">77</span>
-<span class="linenos">78</span><span class="c1"># Step 11: link crops + captions → final dataset</span>
-<span class="linenos">79</span><span class="n">build</span><span class="p">(</span>
-<span class="linenos">80</span>    <span class="n">images_dir</span><span class="o">=</span><span class="s2">&quot;crops&quot;</span><span class="p">,</span>
-<span class="linenos">81</span>    <span class="n">json_dir</span><span class="o">=</span><span class="s2">&quot;subcaptions&quot;</span><span class="p">,</span>
-<span class="linenos">82</span>    <span class="n">output_csv</span><span class="o">=</span><span class="s2">&quot;springer_linked_dataset.csv&quot;</span><span class="p">,</span>
-<span class="linenos">83</span><span class="p">)</span>
+<span class="linenos">71</span><span class="p">)</span>
+<span class="linenos">72</span>
+<span class="linenos">73</span><span class="c1"># Step 11: link crops + captions → final dataset</span>
+<span class="linenos">74</span><span class="n">build</span><span class="p">(</span>
+<span class="linenos">75</span>    <span class="n">images_dir</span><span class="o">=</span><span class="s2">&quot;crops&quot;</span><span class="p">,</span>
+<span class="linenos">76</span>    <span class="n">json_dir</span><span class="o">=</span><span class="s2">&quot;subcaptions&quot;</span><span class="p">,</span>
+<span class="linenos">77</span>    <span class="n">output_csv</span><span class="o">=</span><span class="s2">&quot;springer_linked_dataset.csv&quot;</span><span class="p">,</span>
+<span class="linenos">78</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
-<section id="springer-scopus-workflow">
-<h2>Springer + Scopus Workflow<a class="headerlink" href="#springer-scopus-workflow" title="Link to this heading">¶</a></h2>
+<section id="springer-from-scopus-export-scopus-springer-detection-azure-dataset">
+<h2>Springer from Scopus Export (Scopus → Springer → Detection → Azure → Dataset)<a class="headerlink" href="#springer-from-scopus-export-scopus-springer-detection-azure-dataset" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 <span class="linenos"> 2</span>    <span class="n">load_csvs</span><span class="p">,</span>
 <span class="linenos"> 3</span>    <span class="n">drop_duplicate_dois</span><span class="p">,</span>
@@ -545,12 +540,12 @@
 </pre></div>
 </div>
 </section>
-<section id="cleaner">
-<h2>Cleaner<a class="headerlink" href="#cleaner" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.inference</span><span class="w"> </span><span class="kn">import</span> <span class="n">cleaner</span>
+<section id="cleanup-intermediate-files">
+<h2>Cleanup Intermediate Files<a class="headerlink" href="#cleanup-intermediate-files" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.inference</span><span class="w"> </span><span class="kn">import</span> <span class="n">clean</span>
 
-<span class="n">cleaner</span><span class="o">.</span><span class="n">clean</span><span class="p">(</span><span class="n">dry_run</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="c1"># cleaner.clean()</span>
+<span class="n">clean</span><span class="p">(</span><span class="n">dry_run</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># clean()</span>
 </pre></div>
 </div>
 </section>
@@ -612,11 +607,11 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Examples</a><ul>
-<li><a class="reference internal" href="#elsevier-full-pipeline">Elsevier Full Pipeline</a></li>
-<li><a class="reference internal" href="#elsevier-scopus-workflow">Elsevier + Scopus Workflow</a></li>
-<li><a class="reference internal" href="#springer-full-pipeline">Springer Full Pipeline</a></li>
-<li><a class="reference internal" href="#springer-scopus-workflow">Springer + Scopus Workflow</a></li>
-<li><a class="reference internal" href="#cleaner">Cleaner</a></li>
+<li><a class="reference internal" href="#elsevier-full-pipeline-openalex-elsevier-detection-azure-dataset">Elsevier Full Pipeline (OpenAlex → Elsevier → Detection → Azure → Dataset)</a></li>
+<li><a class="reference internal" href="#elsevier-from-scopus-export-scopus-elsevier-detection-azure-dataset">Elsevier from Scopus Export (Scopus → Elsevier → Detection → Azure → Dataset)</a></li>
+<li><a class="reference internal" href="#springer-full-pipeline-openalex-springer-detection-gemini-dataset">Springer Full Pipeline (OpenAlex → Springer → Detection → Gemini → Dataset)</a></li>
+<li><a class="reference internal" href="#springer-from-scopus-export-scopus-springer-detection-azure-dataset">Springer from Scopus Export (Scopus → Springer → Detection → Azure → Dataset)</a></li>
+<li><a class="reference internal" href="#cleanup-intermediate-files">Cleanup Intermediate Files</a></li>
 </ul>
 </li>
 </ul>

@@ -1,41 +1,41 @@
 Examples
 ========
 
-Elsevier Full Pipeline
-----------------------
+Elsevier Full Pipeline (OpenAlex → Elsevier → Detection → Azure → Dataset)
+---------------------------------------------------------------------------
 
 .. literalinclude:: ../examples/elsevier_full.py
    :language: python
    :linenos:
 
-Elsevier + Scopus Workflow
---------------------------
+Elsevier from Scopus Export (Scopus → Elsevier → Detection → Azure → Dataset)
+------------------------------------------------------------------------------
 
 .. literalinclude:: ../examples/elsevier_scopus.py
    :language: python
    :linenos:
 
-Springer Full Pipeline
-----------------------
+Springer Full Pipeline (OpenAlex → Springer → Detection → Gemini → Dataset)
+----------------------------------------------------------------------------
 
 .. literalinclude:: ../examples/springer_full.py
    :language: python
    :linenos:
 
-Springer + Scopus Workflow
---------------------------
+Springer from Scopus Export (Scopus → Springer → Detection → Azure → Dataset)
+------------------------------------------------------------------------------
 
 .. literalinclude:: ../examples/springer_scopus.py
    :language: python
    :linenos:
 
-Cleaner
--------
+Cleanup Intermediate Files
+--------------------------
 
 .. code-block:: python
 
-   from multimat.inference import cleaner
+   from multimat.inference import clean
 
-   cleaner.clean(dry_run=True)
-   # cleaner.clean()
+   clean(dry_run=True)
+   # clean()
 
