@@ -1,15 +1,19 @@
-from multimat.openalex.fetcher import fetch_springer
-from multimat.preprocess.pipeline import load_csvs
+from multimat.openalex import fetch_springer
+from multimat.preprocess import load_csvs
 
-from multimat.springer.fetcher import fetch_all as springer_fetch
-from multimat.springer.extractor import extract_all as springer_extract
-from multimat.springer.downloader import download_all as springer_download
+from multimat.springer import (
+    fetch_all as springer_fetch,
+    extract_all as springer_extract,
+    download_all as springer_download,
+)
 
-from multimat.inference.detector import detect
-from multimat.inference.cropper import crop
-from multimat.inference.crop_csv_builder import build_crop_csv
-from multimat.inference.captioner_azure import captioner as azure_caption
-from multimat.inference.dataset_builder import build
+from multimat.inference import (
+    detect,
+    crop,
+    build_crop_csv,
+    gemini_captioner as gemini_caption,
+    build,
+)
 
 springer_result = fetch_springer(
     license_="cc-by",
@@ -63,7 +67,7 @@ build_crop_csv(
     output_csv="output/crops_for_captioning.csv",
 )
 
-# Step 10: generate sub-captions via Azure
+# Step 10: generate sub-captions via gemini
 gemini_caption(
     csv_path="output/crops_for_captioning.csv",
     output_dir="subcaptions",

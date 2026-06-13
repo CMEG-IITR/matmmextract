@@ -270,15 +270,31 @@ def captioner(
     with open(csv_path, newline="", encoding="utf-8") as fh:
         rows = list(csv.DictReader(fh))
 
+    # Deduplicate by figure base: img8_A, img8_B, img8_C → one call for img8
+    def get_fig_base(name: str) -> str:
+        parts = name.split("_")
+        for i, p in enumerate(parts):
+            if p.lower().startswith("img") and p[3:].isdigit():
+                return p
+        return name.split("_")[0]
+
+    seen_figures: dict[tuple, dict] = {}
+    for r in rows:
+        name = str(r.get("downloaded_image_name", "")).strip()
+        if not name:
+            continue
+        if r.get("download_status", "success") not in ("success", ""):
+            continue
+        fig_base = get_fig_base(name)
+        key = (fig_base, r.get("caption", ""), r.get("reference_sentences", ""))
+        if key not in seen_figures:
+            seen_figures[key] = {"row": r, "fig_base": fig_base}
+
+    unique_rows = [v["row"] for v in seen_figures.values()]
+
     pending = [
-        r for r in rows
-        if (
-            # Accept rows that explicitly succeeded, OR rows with no
-            # download_status column at all (e.g. crops_for_captioning.csv)
-            r.get("download_status", "success") in ("success", "")
-            and str(r.get("downloaded_image_name", "")).strip()
-        )
-        and (overwrite or not (output_dir / f"{r['downloaded_image_name']}.json").exists())
+        r for r in unique_rows
+        if overwrite or not (output_dir / f"{get_fig_base(r['downloaded_image_name'])}.json").exists()
     ]
 
     result = CaptionResult(
@@ -287,7 +303,7 @@ def captioner(
     )
 
     if verbose:
-        print(f"[captioner] {len(rows)} total rows | {len(pending)} pending | model={model_name}")
+        print(f"[captioner] {len(rows)} crops → {len(unique_rows)} unique figures | {len(pending)} pending | model={model_name}")
 
     if not pending:
         if verbose:
@@ -297,6 +313,7 @@ def captioner(
 
     for i, row in enumerate(pending, start=1):
         image_name = row["downloaded_image_name"]
+        fig_base = get_fig_base(image_name)
         prompt = _PROMPT_TEMPLATE.format(
             caption=row.get("caption", ""),
             reference_sentences=row.get("reference_sentences", ""),
@@ -333,7 +350,7 @@ def captioner(
                     f"ok={result.n_success} err={result.n_error}"
                 )
 
-        out_path = output_dir / f"{image_name}.json"
+        out_path = output_dir / f"{fig_base}.json"
         out_path.write_text(json.dumps(parsed, indent=2, ensure_ascii=False))
 
     if verbose:
