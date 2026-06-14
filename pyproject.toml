@@ -4,15 +4,18 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "multimat"
-version = "0.1.0"
+version = "0.1.1"
 description = "Scientific paper acquisition, extraction, preprocessing, detection and captioning pipeline"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "GNU General Public License v3.0"}
-
 authors = [
+    { name = "Subham Ghosh" },
+    { name = "Abhishek Tewari" },
+    { name = "Mohammad Ibrahim" },
+]
+maintainers = [
   { name = "Subham Ghosh", email="subham_g1@mfs.iitr.ac.in"},
-  { name = "Abhishek Tewari"},
   { name = "Mohammad Ibrahim", email = "kinetikzenassasin@gmail.com" }
 ]
 
