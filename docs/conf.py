@@ -4,7 +4,7 @@ import sys
 sys.path.insert(0, os.path.abspath("../src"))
 
 project = "MultiMat"
-author = "Shubham Ghosh and Mohammad Ibrahim"
+author = "Shubham Ghosh, Abhishek Tewari and Mohammad Ibrahim"
 release = "0.1.0"
 
 extensions = [

@@ -8,7 +8,13 @@ version = "0.1.0"
 description = "Scientific paper acquisition, extraction, preprocessing, detection and captioning pipeline"
 readme = "README.md"
 requires-python = ">=3.10"
-license = "MIT"
+license = { text = "GNU General Public License v3.0"}
+
+authors = [
+  { name = "Subham Ghosh", email="subham_g1@mfs.iitr.ac.in"},
+  { name = "Abhishek Tewari"},
+  { name = "Mohammad Ibrahim", email = "kinetikzenassasin@gmail.com" }
+]
 
 dependencies = [
     "pandas>=3.0",
