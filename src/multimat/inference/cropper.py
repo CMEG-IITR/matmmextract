@@ -120,11 +120,15 @@ def crop(
                 best[lbl] = det
 
         for det in best.values():
-            x1, y1, x2, y2 = [int(round(v)) for v in det["bbox"]]
             label = det["label_name"]
             out_name = f"{stem}_{label}.jpg"
-            crop = pil.crop((x1, y1, x2, y2))
-            crop.save(output_dir / out_name)
+            if label == "single":
+                pil.save(os.path.join(args.output_dir, out_name))
+            else:
+                x1, y1, x2, y2 = [int(round(v)) for v in det["bbox"]]
+                crop = pil.crop((x1, y1, x2, y2))
+                crop.save(output_dir / out_name)
+
             result.n_crops += 1
 
     if verbose:
