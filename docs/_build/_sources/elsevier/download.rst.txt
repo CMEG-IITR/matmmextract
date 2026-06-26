@@ -1,5 +1,5 @@
 Elsevier Download
 =================
 
-.. automodule:: multimat.elsevier.downloader
+.. automodule:: matmmextract.elsevier.downloader
    :members:

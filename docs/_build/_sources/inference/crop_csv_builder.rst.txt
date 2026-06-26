@@ -1,5 +1,5 @@
 Crop CSV Builder
 ================
 
-.. automodule:: multimat.inference.crop_csv_builder
+.. automodule:: matmmextract.inference.crop_csv_builder
    :members:

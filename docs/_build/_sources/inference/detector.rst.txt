@@ -1,5 +1,5 @@
 Detector
 ========
 
-.. automodule:: multimat.inference.detector
+.. automodule:: matmmextract.inference.detector
    :members:

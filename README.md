@@ -91,14 +91,14 @@ Starting from OpenAlex or Scopus metadata, MultiMat automatically retrieves pape
 ## Installation
 
 ```bash
-pip install multimat
+pip install matmmextract
 ```
 
 Or install from source:
 
 ```bash
-git clone https://github.com/<your-org>/multimat.git
-cd multimat
+git clone https://github.com/<your-org>/matmmextract.git
+cd matmmextract
 
 pip install -e .
 ```
@@ -110,7 +110,7 @@ pip install -e .
 ### Search OpenAlex
 
 ```python
-from multimat.openalex import fetch_elsevier
+from matmmextract.openalex import fetch_elsevier
 
 fetch_elsevier(
     keywords=["titanium alloy", "microstructure"],
@@ -127,7 +127,7 @@ fetch_elsevier(
 ### Fetch Elsevier XMLs
 
 ```python
-from multimat.elsevier import fetch_all
+from matmmextract.elsevier import fetch_all
 
 fetch_all(
     df=papers_df,
@@ -142,7 +142,7 @@ fetch_all(
 ### Detect Panels
 
 ```python
-from multimat.inference import detect
+from matmmextract.inference import detect
 
 detect(
     image_dir="images",
@@ -156,7 +156,7 @@ detect(
 ### Generate Captions
 
 ```python
-from multimat.inference import gemini_captioner
+from matmmextract.inference import gemini_captioner
 
 gemini_captioner(
     csv_path="crops.csv",
@@ -170,7 +170,7 @@ gemini_captioner(
 ### Build Final Dataset
 
 ```python
-from multimat.inference import build
+from matmmextract.inference import build
 
 build(
     images_dir="crops",
@@ -222,7 +222,7 @@ python examples/springer_scopus.py
 ## Package Structure
 
 ```text
-multimat
+matmmextract
 ├── openalex
 ├── elsevier
 ├── springer

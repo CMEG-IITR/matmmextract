@@ -1,5 +1,5 @@
 Springer Download
 =================
 
-.. automodule:: multimat.springer.downloader
+.. automodule:: matmmextract.springer.downloader
    :members:

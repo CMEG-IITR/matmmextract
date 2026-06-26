@@ -1,5 +1,5 @@
 Dataset Builder
 ===============
 
-.. automodule:: multimat.inference.dataset_builder
+.. automodule:: matmmextract.inference.dataset_builder
    :members:

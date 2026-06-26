@@ -1,5 +1,5 @@
 Cropper
 =======
 
-.. automodule:: multimat.inference.cropper
+.. automodule:: matmmextract.inference.cropper
    :members:

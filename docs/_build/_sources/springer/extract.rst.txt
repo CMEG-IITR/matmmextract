@@ -1,5 +1,5 @@
 Springer Extract
 ================
 
-.. automodule:: multimat.springer.extractor
+.. automodule:: matmmextract.springer.extractor
    :members:

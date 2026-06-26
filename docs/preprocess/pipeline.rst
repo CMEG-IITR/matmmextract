@@ -1,5 +1,5 @@
 Pipeline
 ========
 
-.. automodule:: multimat.preprocess.pipeline
+.. automodule:: matmmextract.preprocess.pipeline
    :members:

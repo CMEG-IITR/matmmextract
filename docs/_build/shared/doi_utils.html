@@ -249,11 +249,11 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="module-multimat.shared.doi_utils">
-<span id="doi-utilities"></span><h1>DOI Utilities<a class="headerlink" href="#module-multimat.shared.doi_utils" title="Link to this heading">¶</a></h1>
+          <section id="module-matmmextract.shared.doi_utils">
+<span id="doi-utilities"></span><h1>DOI Utilities<a class="headerlink" href="#module-matmmextract.shared.doi_utils" title="Link to this heading">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="multimat.shared.doi_utils.append_line">
-<span class="sig-name descname"><span class="pre">append_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/multimat/shared/doi_utils.html#append_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multimat.shared.doi_utils.append_line" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matmmextract.shared.doi_utils.append_line">
+<span class="sig-name descname"><span class="pre">append_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/matmmextract/shared/doi_utils.html#append_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#matmmextract.shared.doi_utils.append_line" title="Link to this definition">¶</a></dt>
 <dd><p>Append a single line (with newline) to a text file.</p>
 <p>Creates the file if it does not exist.</p>
 <dl class="field-list simple">
@@ -267,8 +267,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="multimat.shared.doi_utils.doi_to_filename">
-<span class="sig-name descname"><span class="pre">doi_to_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'.xml'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/multimat/shared/doi_utils.html#doi_to_filename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multimat.shared.doi_utils.doi_to_filename" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matmmextract.shared.doi_utils.doi_to_filename">
+<span class="sig-name descname"><span class="pre">doi_to_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'.xml'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/matmmextract/shared/doi_utils.html#doi_to_filename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#matmmextract.shared.doi_utils.doi_to_filename" title="Link to this definition">¶</a></dt>
 <dd><p>Convert a DOI to a safe filename.</p>
 <p>Replaces every character that is not word-safe, a hyphen, underscore,
 or dot with <code class="docutils literal notranslate"><span class="pre">_</span></code>.</p>
@@ -289,8 +289,8 @@ or dot with <code class="docutils literal notranslate"><span class="pre">_</span
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="multimat.shared.doi_utils.filename_to_doi">
-<span class="sig-name descname"><span class="pre">filename_to_doi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/multimat/shared/doi_utils.html#filename_to_doi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multimat.shared.doi_utils.filename_to_doi" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matmmextract.shared.doi_utils.filename_to_doi">
+<span class="sig-name descname"><span class="pre">filename_to_doi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/matmmextract/shared/doi_utils.html#filename_to_doi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#matmmextract.shared.doi_utils.filename_to_doi" title="Link to this definition">¶</a></dt>
 <dd><p>Reverse <code class="docutils literal notranslate"><span class="pre">doi_to_filename</span></code>: convert a stem back to a DOI.</p>
 <p>Handles the Springer convention where the first <code class="docutils literal notranslate"><span class="pre">_</span></code> after the
 registrant prefix (<code class="docutils literal notranslate"><span class="pre">10.XXXX</span></code>) maps back to <code class="docutils literal notranslate"><span class="pre">/</span></code>.</p>
@@ -310,8 +310,8 @@ if the stem does not look like a DOI.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="multimat.shared.doi_utils.load_set">
-<span class="sig-name descname"><span class="pre">load_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/multimat/shared/doi_utils.html#load_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multimat.shared.doi_utils.load_set" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="matmmextract.shared.doi_utils.load_set">
+<span class="sig-name descname"><span class="pre">load_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/matmmextract/shared/doi_utils.html#load_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#matmmextract.shared.doi_utils.load_set" title="Link to this definition">¶</a></dt>
 <dd><p>Load a newline-delimited text file into a set of strings.</p>
 <p>Returns an empty set if the file does not exist.</p>
 <dl class="field-list simple">
@@ -379,10 +379,10 @@ if the stem does not look like a DOI.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">DOI Utilities</a><ul>
-<li><a class="reference internal" href="#multimat.shared.doi_utils.append_line"><code class="docutils literal notranslate"><span class="pre">append_line()</span></code></a></li>
-<li><a class="reference internal" href="#multimat.shared.doi_utils.doi_to_filename"><code class="docutils literal notranslate"><span class="pre">doi_to_filename()</span></code></a></li>
-<li><a class="reference internal" href="#multimat.shared.doi_utils.filename_to_doi"><code class="docutils literal notranslate"><span class="pre">filename_to_doi()</span></code></a></li>
-<li><a class="reference internal" href="#multimat.shared.doi_utils.load_set"><code class="docutils literal notranslate"><span class="pre">load_set()</span></code></a></li>
+<li><a class="reference internal" href="#matmmextract.shared.doi_utils.append_line"><code class="docutils literal notranslate"><span class="pre">append_line()</span></code></a></li>
+<li><a class="reference internal" href="#matmmextract.shared.doi_utils.doi_to_filename"><code class="docutils literal notranslate"><span class="pre">doi_to_filename()</span></code></a></li>
+<li><a class="reference internal" href="#matmmextract.shared.doi_utils.filename_to_doi"><code class="docutils literal notranslate"><span class="pre">filename_to_doi()</span></code></a></li>
+<li><a class="reference internal" href="#matmmextract.shared.doi_utils.load_set"><code class="docutils literal notranslate"><span class="pre">load_set()</span></code></a></li>
 </ul>
 </li>
 </ul>

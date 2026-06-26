@@ -1,5 +1,5 @@
 Downloader
 ==========
 
-.. automodule:: multimat.shared.downloader
+.. automodule:: matmmextract.shared.downloader
    :members:

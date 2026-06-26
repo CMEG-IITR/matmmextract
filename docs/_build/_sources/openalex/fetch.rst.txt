@@ -1,5 +1,5 @@
 OpenAlex Fetch
 ==============
 
-.. automodule:: multimat.openalex.fetcher
+.. automodule:: matmmextract.openalex.fetcher
    :members:

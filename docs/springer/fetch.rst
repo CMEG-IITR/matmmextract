@@ -1,5 +1,5 @@
 Springer Fetch
 ==============
 
-.. automodule:: multimat.springer.fetcher
+.. automodule:: matmmextract.springer.fetcher
    :members:

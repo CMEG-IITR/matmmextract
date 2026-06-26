@@ -1,5 +1,5 @@
 Captioner
 =========
 
-.. automodule:: multimat.inference.captioner_gemini
+.. automodule:: matmmextract.inference.captioner_gemini
    :members:

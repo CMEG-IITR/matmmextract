@@ -1,5 +1,5 @@
 Sentence Utilities
 ==================
 
-.. automodule:: multimat.shared.sentence_utils
+.. automodule:: matmmextract.shared.sentence_utils
    :members:

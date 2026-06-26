@@ -1,5 +1,5 @@
 Elsevier Fetch
 ==============
 
-.. automodule:: multimat.elsevier.fetcher
+.. automodule:: matmmextract.elsevier.fetcher
    :members:

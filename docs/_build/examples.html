@@ -253,16 +253,16 @@
 <h1>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h1>
 <section id="elsevier-full-pipeline-openalex-elsevier-detection-azure-dataset">
 <h2>Elsevier Full Pipeline (OpenAlex → Elsevier → Detection → Azure → Dataset)<a class="headerlink" href="#elsevier-full-pipeline-openalex-elsevier-detection-azure-dataset" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.preprocess.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_csvs</span>
-<span class="linenos"> 2</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.inference.detector</span><span class="w"> </span><span class="kn">import</span> <span class="n">detect</span>
-<span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.inference.cropper</span><span class="w"> </span><span class="kn">import</span> <span class="n">crop</span>
-<span class="linenos"> 4</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.inference.crop_csv_builder</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_crop_csv</span>
-<span class="linenos"> 5</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.inference.captioner_azure</span><span class="w"> </span><span class="kn">import</span> <span class="n">captioner</span> <span class="k">as</span> <span class="n">azure_caption</span>
-<span class="linenos"> 6</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.inference.dataset_builder</span><span class="w"> </span><span class="kn">import</span> <span class="n">build</span>
-<span class="linenos"> 7</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.openalex.fetcher</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_elsevier</span>
-<span class="linenos"> 8</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.elsevier.extractor</span><span class="w"> </span><span class="kn">import</span> <span class="n">extract_all</span> <span class="k">as</span> <span class="n">elsevier_extract</span>
-<span class="linenos"> 9</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.elsevier.downloader</span><span class="w"> </span><span class="kn">import</span> <span class="n">download_all</span> <span class="k">as</span> <span class="n">elsevier_download</span>
-<span class="linenos">10</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.elsevier.fetcher</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_all</span> <span class="k">as</span> <span class="n">elsevier_fetch</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.preprocess.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_csvs</span>
+<span class="linenos"> 2</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.inference.detector</span><span class="w"> </span><span class="kn">import</span> <span class="n">detect</span>
+<span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.inference.cropper</span><span class="w"> </span><span class="kn">import</span> <span class="n">crop</span>
+<span class="linenos"> 4</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.inference.crop_csv_builder</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_crop_csv</span>
+<span class="linenos"> 5</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.inference.captioner_azure</span><span class="w"> </span><span class="kn">import</span> <span class="n">captioner</span> <span class="k">as</span> <span class="n">azure_caption</span>
+<span class="linenos"> 6</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.inference.dataset_builder</span><span class="w"> </span><span class="kn">import</span> <span class="n">build</span>
+<span class="linenos"> 7</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.openalex.fetcher</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_elsevier</span>
+<span class="linenos"> 8</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.elsevier.extractor</span><span class="w"> </span><span class="kn">import</span> <span class="n">extract_all</span> <span class="k">as</span> <span class="n">elsevier_extract</span>
+<span class="linenos"> 9</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.elsevier.downloader</span><span class="w"> </span><span class="kn">import</span> <span class="n">download_all</span> <span class="k">as</span> <span class="n">elsevier_download</span>
+<span class="linenos">10</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.elsevier.fetcher</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_all</span> <span class="k">as</span> <span class="n">elsevier_fetch</span>
 <span class="linenos">11</span>
 <span class="linenos">12</span>
 <span class="linenos">13</span><span class="n">elsevier_result</span> <span class="o">=</span> <span class="n">fetch_elsevier</span><span class="p">(</span>
@@ -342,19 +342,19 @@
 </section>
 <section id="elsevier-from-scopus-export-scopus-elsevier-detection-azure-dataset">
 <h2>Elsevier from Scopus Export (Scopus → Elsevier → Detection → Azure → Dataset)<a class="headerlink" href="#elsevier-from-scopus-export-scopus-elsevier-detection-azure-dataset" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 <span class="linenos"> 2</span>    <span class="n">load_csvs</span><span class="p">,</span>
 <span class="linenos"> 3</span>    <span class="n">drop_duplicate_dois</span><span class="p">,</span>
 <span class="linenos"> 4</span>    <span class="n">filter_open_access</span><span class="p">,</span>
 <span class="linenos"> 5</span>    <span class="n">save_csv</span><span class="p">,</span>
 <span class="linenos"> 6</span><span class="p">)</span>
 <span class="linenos"> 7</span>
-<span class="linenos"> 8</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="linenos"> 8</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 <span class="linenos"> 9</span>    <span class="n">scan_directory</span><span class="p">,</span>
 <span class="linenos">10</span>    <span class="n">filter_figures_cc_by</span><span class="p">,</span>
 <span class="linenos">11</span><span class="p">)</span>
 <span class="linenos">12</span>
-<span class="linenos">13</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.elsevier</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="linenos">13</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.elsevier</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 <span class="linenos">14</span>    <span class="n">fetch_all</span> <span class="k">as</span> <span class="n">elsevier_fetch</span><span class="p">,</span>
 <span class="linenos">15</span>    <span class="n">extract_all</span> <span class="k">as</span> <span class="n">elsevier_extract</span><span class="p">,</span>
 <span class="linenos">16</span>    <span class="n">download_all</span> <span class="k">as</span> <span class="n">elsevier_download</span><span class="p">,</span>
@@ -411,16 +411,16 @@
 </section>
 <section id="springer-full-pipeline-openalex-springer-detection-gemini-dataset">
 <h2>Springer Full Pipeline (OpenAlex → Springer → Detection → Gemini → Dataset)<a class="headerlink" href="#springer-full-pipeline-openalex-springer-detection-gemini-dataset" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.openalex</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_springer</span>
-<span class="linenos"> 2</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_csvs</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.openalex</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_springer</span>
+<span class="linenos"> 2</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_csvs</span>
 <span class="linenos"> 3</span>
-<span class="linenos"> 4</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.springer</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="linenos"> 4</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.springer</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 <span class="linenos"> 5</span>    <span class="n">fetch_all</span> <span class="k">as</span> <span class="n">springer_fetch</span><span class="p">,</span>
 <span class="linenos"> 6</span>    <span class="n">extract_all</span> <span class="k">as</span> <span class="n">springer_extract</span><span class="p">,</span>
 <span class="linenos"> 7</span>    <span class="n">download_all</span> <span class="k">as</span> <span class="n">springer_download</span><span class="p">,</span>
 <span class="linenos"> 8</span><span class="p">)</span>
 <span class="linenos"> 9</span>
-<span class="linenos">10</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.inference</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="linenos">10</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.inference</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 <span class="linenos">11</span>    <span class="n">detect</span><span class="p">,</span>
 <span class="linenos">12</span>    <span class="n">crop</span><span class="p">,</span>
 <span class="linenos">13</span>    <span class="n">build_crop_csv</span><span class="p">,</span>
@@ -498,13 +498,13 @@
 </section>
 <section id="springer-from-scopus-export-scopus-springer-detection-azure-dataset">
 <h2>Springer from Scopus Export (Scopus → Springer → Detection → Azure → Dataset)<a class="headerlink" href="#springer-from-scopus-export-scopus-springer-detection-azure-dataset" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 <span class="linenos"> 2</span>    <span class="n">load_csvs</span><span class="p">,</span>
 <span class="linenos"> 3</span>    <span class="n">drop_duplicate_dois</span><span class="p">,</span>
 <span class="linenos"> 4</span>    <span class="n">save_csv</span><span class="p">,</span>
 <span class="linenos"> 5</span><span class="p">)</span>
 <span class="linenos"> 6</span>
-<span class="linenos"> 7</span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.springer</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="linenos"> 7</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.springer</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 <span class="linenos"> 8</span>    <span class="n">fetch_all</span> <span class="k">as</span> <span class="n">springer_fetch</span><span class="p">,</span>
 <span class="linenos"> 9</span>    <span class="n">extract_all</span> <span class="k">as</span> <span class="n">springer_extract</span><span class="p">,</span>
 <span class="linenos">10</span>    <span class="n">download_all</span> <span class="k">as</span> <span class="n">springer_download</span><span class="p">,</span>
@@ -546,7 +546,7 @@
 </section>
 <section id="cleanup-intermediate-files">
 <h2>Cleanup Intermediate Files<a class="headerlink" href="#cleanup-intermediate-files" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">multimat.inference</span><span class="w"> </span><span class="kn">import</span> <span class="n">clean</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.inference</span><span class="w"> </span><span class="kn">import</span> <span class="n">clean</span>
 
 <span class="n">clean</span><span class="p">(</span><span class="n">dry_run</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="c1"># clean()</span>

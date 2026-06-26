@@ -1,5 +1,5 @@
 CC License
 ==========
 
-.. automodule:: multimat.preprocess.cc_license
+.. automodule:: matmmextract.preprocess.cc_license
    :members:

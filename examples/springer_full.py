@@ -1,13 +1,13 @@
-from multimat.openalex import fetch_springer
-from multimat.preprocess import load_csvs
+from matmmextract.openalex import fetch_springer
+from matmmextract.preprocess import load_csvs
 
-from multimat.springer import (
+from matmmextract.springer import (
     fetch_all as springer_fetch,
     extract_all as springer_extract,
     download_all as springer_download,
 )
 
-from multimat.inference import (
+from matmmextract.inference import (
     detect,
     crop,
     build_crop_csv,

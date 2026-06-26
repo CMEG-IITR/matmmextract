@@ -1,16 +1,16 @@
-from multimat.preprocess import (
+from matmmextract.preprocess import (
     load_csvs,
     drop_duplicate_dois,
     filter_open_access,
     save_csv,
 )
 
-from multimat.preprocess import (
+from matmmextract.preprocess import (
     scan_directory,
     filter_figures_cc_by,
 )
 
-from multimat.elsevier import (
+from matmmextract.elsevier import (
     fetch_all as elsevier_fetch,
     extract_all as elsevier_extract,
     download_all as elsevier_download,

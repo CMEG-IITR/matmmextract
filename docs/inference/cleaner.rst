@@ -1,5 +1,5 @@
 Cleaner
 =======
 
-.. automodule:: multimat.inference.cleaner
+.. automodule:: matmmextract.inference.cleaner
    :members:

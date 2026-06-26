@@ -34,7 +34,7 @@ Cleanup Intermediate Files
 
 .. code-block:: python
 
-   from multimat.inference import clean
+   from matmmextract.inference import clean
 
    clean(dry_run=True)
    # clean()

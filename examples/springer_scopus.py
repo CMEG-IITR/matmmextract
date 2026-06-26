@@ -1,10 +1,10 @@
-from multimat.preprocess import (
+from matmmextract.preprocess import (
     load_csvs,
     drop_duplicate_dois,
     save_csv,
 )
 
-from multimat.springer import (
+from matmmextract.springer import (
     fetch_all as springer_fetch,
     extract_all as springer_extract,
     download_all as springer_download,

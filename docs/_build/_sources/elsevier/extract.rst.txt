@@ -1,5 +1,5 @@
 Elsevier Extract
 ================
 
-.. automodule:: multimat.elsevier.extractor
+.. automodule:: matmmextract.elsevier.extractor
    :members:

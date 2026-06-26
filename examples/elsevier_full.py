@@ -1,13 +1,13 @@
-from multimat.preprocess.pipeline import load_csvs
-from multimat.inference.detector import detect
-from multimat.inference.cropper import crop
-from multimat.inference.crop_csv_builder import build_crop_csv
-from multimat.inference.captioner_azure import captioner as azure_caption
-from multimat.inference.dataset_builder import build
-from multimat.openalex.fetcher import fetch_elsevier
-from multimat.elsevier.extractor import extract_all as elsevier_extract
-from multimat.elsevier.downloader import download_all as elsevier_download
-from multimat.elsevier.fetcher import fetch_all as elsevier_fetch
+from matmmextract.preprocess.pipeline import load_csvs
+from matmmextract.inference.detector import detect
+from matmmextract.inference.cropper import crop
+from matmmextract.inference.crop_csv_builder import build_crop_csv
+from matmmextract.inference.captioner_azure import captioner as azure_caption
+from matmmextract.inference.dataset_builder import build
+from matmmextract.openalex.fetcher import fetch_elsevier
+from matmmextract.elsevier.extractor import extract_all as elsevier_extract
+from matmmextract.elsevier.downloader import download_all as elsevier_download
+from matmmextract.elsevier.fetcher import fetch_all as elsevier_fetch
 
 
 elsevier_result = fetch_elsevier(
