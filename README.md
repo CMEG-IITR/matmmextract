@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="logo.svg" alt="MatMMExtract Logo" width="220">
+</p>
+
 # MultiMat
 
 **MultiMat** is an end-to-end pipeline for building multimodal materials-science datasets from scientific literature.

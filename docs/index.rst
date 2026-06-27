@@ -1,3 +1,7 @@
+.. image:: ../logo.svg
+   :align: center
+   :width: 220px
+
 MultiMat
 ========
 
