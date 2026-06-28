@@ -169,6 +169,7 @@ def captioner(
     image_name_col: str = "downloaded_image_name",
     caption_col: str = "caption",
     reference_col: str = "reference_sentences",
+    requests_per_minute: int | None = None,
     verbose: bool = True,
 ) -> CaptionResult:
     """Generate sub-captions for every row in *csv_path* using an Azure model.
