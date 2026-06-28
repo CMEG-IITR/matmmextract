@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "matmmextract"
+version = "0.1.1"
+description = "Scientific paper acquisition, extraction, preprocessing, detection and captioning pipeline"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "GNU General Public License v3.0"}
+authors = [
+    { name = "Subham Ghosh" },
+    { name = "Abhishek Tewari" },
+    { name = "Mohammad Ibrahim" },
+]
+maintainers = [
+  { name = "Subham Ghosh", email="subham_g1@mfs.iitr.ac.in"},
+  { name = "Mohammad Ibrahim", email = "kinetikzenassasin@gmail.com" }
+]
+
+dependencies = [
+    "pandas>=3.0",
+    "requests>=2.34",
+    "beautifulsoup4>=4.14",
+    "lxml>=6.1",
+    "torch>=2.12",
+    "torchvision>=0.27",
+    "ultralytics>=8.4",
+    "Pillow>=12.2",
+    "tqdm>=4.68",
+    "transformers>=5.10",
+    "google-genai>=2.8",
+    "openai>=2.41",
+    "numpy>=2.4",
+    "gdown>=6.1",
+]
+
+[project.optional-dependencies]
+docs = [
+    "sphinx",
+    "sphinx-rtd-theme",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
