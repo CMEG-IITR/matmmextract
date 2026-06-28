@@ -2,11 +2,11 @@
   <img src="logo.svg" alt="MatMMExtract Logo" width="220">
 </p>
 
-# MultiMat
+# MatmmExtract
 
-**MultiMat** is an end-to-end pipeline for building multimodal materials-science datasets from scientific literature.
+**MatmmExtract** is an end-to-end pipeline for building multimodal materials-science datasets from scientific literature.
 
-Starting from OpenAlex or Scopus metadata, MultiMat automatically retrieves papers, extracts figures and captions, downloads images, detects sub-panels, generates fine-grained captions using modern LLMs, and links everything into a machine-learning-ready dataset.
+Starting from OpenAlex or Scopus metadata, MatmmExtract automatically retrieves papers, extracts figures and captions, downloads images, detects sub-panels, generates fine-grained captions using modern LLMs, and links everything into a machine-learning-ready dataset.
 
 ---
 
@@ -187,7 +187,7 @@ build(
 
 ## Example Pipelines
 
-MultiMat ships with complete examples:
+MatmmExtract ships with complete examples:
 
 ```text
 examples/
@@ -279,10 +279,10 @@ docs/_build/index.html
 
 ## Citation
 
-If you use MultiMat in academic work, please cite:
+If you use MatmmExtract in academic work, please cite:
 
 ```text
-MultiMat: A Pipeline for Constructing Multimodal Materials-Science Datasets
+MatmmExtract: A Pipeline for Constructing Multimodal Materials-Science Datasets
 from Scientific Literature.
 ```
 
