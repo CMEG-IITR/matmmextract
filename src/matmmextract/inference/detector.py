@@ -73,6 +73,24 @@ def _is_gdrive_url(s: str) -> bool:
     return "drive.google.com" in s or "docs.google.com" in s
 
 
+def _is_hf_url(s: str) -> bool:
+    return "huggingface.co" in s
+
+
+def _is_hf_repo_id(s: str) -> bool:
+    """
+    Matches bare repo IDs like "username/model-name" or
+    "username/model-name:filename.pt" (no scheme, no slashes beyond one).
+    """
+    if _is_url(s) or _is_gdrive_url(s):
+        return False
+    # repo_id pattern: exactly one "/" between two non-empty segments,
+    # optionally followed by ":filename"
+    core = s.split(":", 1)[0]
+    parts = core.split("/")
+    return len(parts) == 2 and all(parts) and not s.startswith((".", "/"))
+
+
 def _is_url(s: str) -> bool:
     return str(s).startswith(("http://", "https://"))
 
@@ -126,6 +144,70 @@ def _download_gdrive(url: str, cache_dir: str | Path = ".weights_cache") -> str:
     return str(dest)
 
 
+def _download_hf(source: str, cache_dir: str | Path = ".weights_cache") -> str:
+    """Download a .pt file from a Hugging Face Hub repo and return the local path.
+
+    Accepts:
+    - A full URL: https://huggingface.co/<user>/<repo>/resolve/main/best.pt
+    - A bare repo ID: "<user>/<repo>" (auto-detects the .pt filename in the repo)
+    - A repo ID with filename: "<user>/<repo>:best.pt"
+    """
+    try:
+        from huggingface_hub import hf_hub_download, list_repo_files
+    except ImportError:
+        raise ImportError(
+            "huggingface_hub is required: pip install huggingface_hub"
+        )
+
+    import re
+
+    repo_id = source
+    filename = None
+
+    if _is_hf_url(source):
+        # https://huggingface.co/<user>/<repo>/resolve/main/<filename>
+        # https://huggingface.co/<user>/<repo>/blob/main/<filename>
+        m = re.search(
+            r"huggingface\.co/([^/]+/[^/]+)/(?:resolve|blob)/[^/]+/(.+?)(?:\?.*)?$",
+            source,
+        )
+        if m:
+            repo_id, filename = m.group(1), m.group(2)
+        else:
+            # Fallback: just the repo, e.g. https://huggingface.co/<user>/<repo>
+            m2 = re.search(r"huggingface\.co/([^/]+/[^/]+)", source)
+            if not m2:
+                raise ValueError(f"Could not parse Hugging Face URL: {source}")
+            repo_id = m2.group(1)
+    elif ":" in source:
+        repo_id, filename = source.split(":", 1)
+
+    cache_dir = Path(cache_dir)
+    cache_dir.mkdir(parents=True, exist_ok=True)
+
+    if filename is None:
+        # Auto-detect: find the first .pt file in the repo
+        try:
+            files = list_repo_files(repo_id)
+        except Exception as exc:
+            raise RuntimeError(f"Could not list files in HF repo '{repo_id}': {exc}")
+        pt_files = [f for f in files if f.endswith(".pt")]
+        if not pt_files:
+            raise FileNotFoundError(f"No .pt files found in Hugging Face repo: {repo_id}")
+        # Prefer best.pt / last.pt if present
+        preferred = [f for f in pt_files if Path(f).name in ("best.pt", "last.pt")]
+        filename = preferred[0] if preferred else sorted(pt_files)[0]
+        print(f"[detector] auto-selected '{filename}' from repo '{repo_id}'")
+
+    print(f"[detector] downloading from Hugging Face: {repo_id} / {filename}")
+    local_path = hf_hub_download(
+        repo_id=repo_id,
+        filename=filename,
+        cache_dir=str(cache_dir),
+    )
+    return local_path
+
+
 def resolve_weights(checkpoint: str | Path, cache_dir: str | Path = ".weights_cache") -> str:
     """Resolve weights to a local .pt path.
 
@@ -140,11 +222,15 @@ def resolve_weights(checkpoint: str | Path, cache_dir: str | Path = ".weights_ca
     if _is_gdrive_url(s):
         return _download_gdrive(s, cache_dir=cache_dir)
 
+    # Hugging Face Hub URL or bare repo ID ("user/repo" or "user/repo:file.pt")
+    if _is_hf_url(s) or _is_hf_repo_id(s):
+        return _download_hf(s, cache_dir=cache_dir)
+
     # Other URL — not supported yet
     if _is_url(s):
         raise ValueError(
-            f"URL '{s}' is not a Google Drive link. "
-            f"Only Google Drive URLs are currently supported."
+            f"URL '{s}' is not a Google Drive or Hugging Face link. "
+            f"Only Google Drive and Hugging Face URLs are currently supported."
         )
 
     # Local path
@@ -192,8 +278,11 @@ def detect(
         ``_summary.json`` containing all records combined.
     checkpoint:
         Path to a YOLO ``.pt`` file, a directory containing
-        ``best.pt`` / ``last.pt``, or a Google Drive share URL
-        (e.g. ``https://drive.google.com/file/d/<ID>/view``).
+        ``best.pt`` / ``last.pt``, a Google Drive share URL
+        (e.g. ``https://drive.google.com/file/d/<ID>/view``), or a
+        Hugging Face Hub reference — a full URL
+        (``https://huggingface.co/<user>/<repo>/resolve/main/best.pt``)
+        or a bare repo ID (``"<user>/<repo>"`` or ``"<user>/<repo>:best.pt"``).
     weights_cache_dir:
         Local directory to cache downloaded weights (default ``.weights_cache``).
     conf:

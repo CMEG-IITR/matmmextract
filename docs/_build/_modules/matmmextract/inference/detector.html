@@ -332,6 +332,24 @@
     <span class="k">return</span> <span class="s2">&quot;drive.google.com&quot;</span> <span class="ow">in</span> <span class="n">s</span> <span class="ow">or</span> <span class="s2">&quot;docs.google.com&quot;</span> <span class="ow">in</span> <span class="n">s</span>
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">_is_hf_url</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s2">&quot;huggingface.co&quot;</span> <span class="ow">in</span> <span class="n">s</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_is_hf_repo_id</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Matches bare repo IDs like &quot;username/model-name&quot; or</span>
+<span class="sd">    &quot;username/model-name:filename.pt&quot; (no scheme, no slashes beyond one).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">_is_url</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="ow">or</span> <span class="n">_is_gdrive_url</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="c1"># repo_id pattern: exactly one &quot;/&quot; between two non-empty segments,</span>
+    <span class="c1"># optionally followed by &quot;:filename&quot;</span>
+    <span class="n">core</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">s</span><span class="o">.</span><span class="n">startswith</span><span class="p">((</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">))</span>
+
+
 <span class="k">def</span><span class="w"> </span><span class="nf">_is_url</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">startswith</span><span class="p">((</span><span class="s2">&quot;http://&quot;</span><span class="p">,</span> <span class="s2">&quot;https://&quot;</span><span class="p">))</span>
 
@@ -385,6 +403,70 @@
     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">dest</span><span class="p">)</span>
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">_download_hf</span><span class="p">(</span><span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">cache_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">=</span> <span class="s2">&quot;.weights_cache&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Download a .pt file from a Hugging Face Hub repo and return the local path.</span>
+
+<span class="sd">    Accepts:</span>
+<span class="sd">    - A full URL: https://huggingface.co/&lt;user&gt;/&lt;repo&gt;/resolve/main/best.pt</span>
+<span class="sd">    - A bare repo ID: &quot;&lt;user&gt;/&lt;repo&gt;&quot; (auto-detects the .pt filename in the repo)</span>
+<span class="sd">    - A repo ID with filename: &quot;&lt;user&gt;/&lt;repo&gt;:best.pt&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">huggingface_hub</span><span class="w"> </span><span class="kn">import</span> <span class="n">hf_hub_download</span><span class="p">,</span> <span class="n">list_repo_files</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+            <span class="s2">&quot;huggingface_hub is required: pip install huggingface_hub&quot;</span>
+        <span class="p">)</span>
+
+    <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+    <span class="n">repo_id</span> <span class="o">=</span> <span class="n">source</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">_is_hf_url</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
+        <span class="c1"># https://huggingface.co/&lt;user&gt;/&lt;repo&gt;/resolve/main/&lt;filename&gt;</span>
+        <span class="c1"># https://huggingface.co/&lt;user&gt;/&lt;repo&gt;/blob/main/&lt;filename&gt;</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+            <span class="sa">r</span><span class="s2">&quot;huggingface\.co/([^/]+/[^/]+)/(?:resolve|blob)/[^/]+/(.+?)(?:\?.*)?$&quot;</span><span class="p">,</span>
+            <span class="n">source</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+            <span class="n">repo_id</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Fallback: just the repo, e.g. https://huggingface.co/&lt;user&gt;/&lt;repo&gt;</span>
+            <span class="n">m2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;huggingface\.co/([^/]+/[^/]+)&quot;</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">m2</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not parse Hugging Face URL: </span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">repo_id</span> <span class="o">=</span> <span class="n">m2</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">source</span><span class="p">:</span>
+        <span class="n">repo_id</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">cache_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">cache_dir</span><span class="p">)</span>
+    <span class="n">cache_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Auto-detect: find the first .pt file in the repo</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">files</span> <span class="o">=</span> <span class="n">list_repo_files</span><span class="p">(</span><span class="n">repo_id</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not list files in HF repo &#39;</span><span class="si">{</span><span class="n">repo_id</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">pt_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.pt&quot;</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">pt_files</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No .pt files found in Hugging Face repo: </span><span class="si">{</span><span class="n">repo_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># Prefer best.pt / last.pt if present</span>
+        <span class="n">preferred</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">pt_files</span> <span class="k">if</span> <span class="n">Path</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;best.pt&quot;</span><span class="p">,</span> <span class="s2">&quot;last.pt&quot;</span><span class="p">)]</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">preferred</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">preferred</span> <span class="k">else</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">pt_files</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[detector] auto-selected &#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39; from repo &#39;</span><span class="si">{</span><span class="n">repo_id</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[detector] downloading from Hugging Face: </span><span class="si">{</span><span class="n">repo_id</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">local_path</span> <span class="o">=</span> <span class="n">hf_hub_download</span><span class="p">(</span>
+        <span class="n">repo_id</span><span class="o">=</span><span class="n">repo_id</span><span class="p">,</span>
+        <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
+        <span class="n">cache_dir</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">cache_dir</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">local_path</span>
+
+
 <div class="viewcode-block" id="resolve_weights">
 <a class="viewcode-back" href="../../../inference/detector.html#matmmextract.inference.detector.resolve_weights">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">resolve_weights</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span> <span class="n">cache_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">=</span> <span class="s2">&quot;.weights_cache&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -401,11 +483,15 @@
     <span class="k">if</span> <span class="n">_is_gdrive_url</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">_download_gdrive</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir</span><span class="p">)</span>
 
+    <span class="c1"># Hugging Face Hub URL or bare repo ID (&quot;user/repo&quot; or &quot;user/repo:file.pt&quot;)</span>
+    <span class="k">if</span> <span class="n">_is_hf_url</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="ow">or</span> <span class="n">_is_hf_repo_id</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_download_hf</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir</span><span class="p">)</span>
+
     <span class="c1"># Other URL — not supported yet</span>
     <span class="k">if</span> <span class="n">_is_url</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;URL &#39;</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">&#39; is not a Google Drive link. &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;Only Google Drive URLs are currently supported.&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;URL &#39;</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">&#39; is not a Google Drive or Hugging Face link. &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Only Google Drive and Hugging Face URLs are currently supported.&quot;</span>
         <span class="p">)</span>
 
     <span class="c1"># Local path</span>
@@ -456,8 +542,11 @@
 <span class="sd">        ``_summary.json`` containing all records combined.</span>
 <span class="sd">    checkpoint:</span>
 <span class="sd">        Path to a YOLO ``.pt`` file, a directory containing</span>
-<span class="sd">        ``best.pt`` / ``last.pt``, or a Google Drive share URL</span>
-<span class="sd">        (e.g. ``https://drive.google.com/file/d/&lt;ID&gt;/view``).</span>
+<span class="sd">        ``best.pt`` / ``last.pt``, a Google Drive share URL</span>
+<span class="sd">        (e.g. ``https://drive.google.com/file/d/&lt;ID&gt;/view``), or a</span>
+<span class="sd">        Hugging Face Hub reference — a full URL</span>
+<span class="sd">        (``https://huggingface.co/&lt;user&gt;/&lt;repo&gt;/resolve/main/best.pt``)</span>
+<span class="sd">        or a bare repo ID (``&quot;&lt;user&gt;/&lt;repo&gt;&quot;`` or ``&quot;&lt;user&gt;/&lt;repo&gt;:best.pt&quot;``).</span>
 <span class="sd">    weights_cache_dir:</span>
 <span class="sd">        Local directory to cache downloaded weights (default ``.weights_cache``).</span>
 <span class="sd">    conf:</span>

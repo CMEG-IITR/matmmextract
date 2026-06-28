@@ -255,8 +255,8 @@
         <article role="main" id="furo-main-content">
           <section id="examples">
 <h1>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h1>
-<section id="elsevier-full-pipeline-openalex-elsevier-detection-azure-dataset">
-<h2>Elsevier Full Pipeline (OpenAlex → Elsevier → Detection → Azure → Dataset)<a class="headerlink" href="#elsevier-full-pipeline-openalex-elsevier-detection-azure-dataset" title="Link to this heading">¶</a></h2>
+<section id="elsevier-full-pipeline-openalex-elsevier-detection-model-checkpoint-from-google-drive-azure-dataset">
+<h2>Elsevier Full Pipeline (OpenAlex → Elsevier → Detection (model checkpoint from Google Drive) → Azure → Dataset)<a class="headerlink" href="#elsevier-full-pipeline-openalex-elsevier-detection-model-checkpoint-from-google-drive-azure-dataset" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.preprocess.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_csvs</span>
 <span class="linenos"> 2</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.inference.detector</span><span class="w"> </span><span class="kn">import</span> <span class="n">detect</span>
 <span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.inference.cropper</span><span class="w"> </span><span class="kn">import</span> <span class="n">crop</span>
@@ -344,8 +344,8 @@
 </pre></div>
 </div>
 </section>
-<section id="elsevier-from-scopus-export-scopus-elsevier-detection-azure-dataset">
-<h2>Elsevier from Scopus Export (Scopus → Elsevier → Detection → Azure → Dataset)<a class="headerlink" href="#elsevier-from-scopus-export-scopus-elsevier-detection-azure-dataset" title="Link to this heading">¶</a></h2>
+<section id="elsevier-from-scopus-export-scopus-elsevier">
+<h2>Elsevier from Scopus Export (Scopus → Elsevier)<a class="headerlink" href="#elsevier-from-scopus-export-scopus-elsevier" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 <span class="linenos"> 2</span>    <span class="n">load_csvs</span><span class="p">,</span>
 <span class="linenos"> 3</span>    <span class="n">drop_duplicate_dois</span><span class="p">,</span>
@@ -413,8 +413,8 @@
 </pre></div>
 </div>
 </section>
-<section id="springer-full-pipeline-openalex-springer-detection-gemini-dataset">
-<h2>Springer Full Pipeline (OpenAlex → Springer → Detection → Gemini → Dataset)<a class="headerlink" href="#springer-full-pipeline-openalex-springer-detection-gemini-dataset" title="Link to this heading">¶</a></h2>
+<section id="springer-full-pipeline-openalex-springer-detection-model-checkpoint-from-hugging-face-hub-gemini-dataset">
+<h2>Springer Full Pipeline (OpenAlex → Springer → Detection (model checkpoint from Hugging Face Hub) → Gemini → Dataset)<a class="headerlink" href="#springer-full-pipeline-openalex-springer-detection-model-checkpoint-from-hugging-face-hub-gemini-dataset" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.openalex</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_springer</span>
 <span class="linenos"> 2</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_csvs</span>
 <span class="linenos"> 3</span>
@@ -466,7 +466,7 @@
 <span class="linenos">49</span><span class="n">detect</span><span class="p">(</span>
 <span class="linenos">50</span>    <span class="n">image_dir</span><span class="o">=</span><span class="s2">&quot;images/springer&quot;</span><span class="p">,</span>
 <span class="linenos">51</span>    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;inference_results&quot;</span><span class="p">,</span>
-<span class="linenos">52</span>    <span class="n">checkpoint</span><span class="o">=</span><span class="s2">&quot;https://drive.google.com/file/d/10garsNWEdgzMGX9nyDE8dMABkU_3BYp9/view?usp=sharing&quot;</span><span class="p">,</span>
+<span class="linenos">52</span>    <span class="n">checkpoint</span><span class="o">=</span><span class="s2">&quot;https://huggingface.co/CMEG-IITR/yolo12_unique_multimat&quot;</span><span class="p">,</span>
 <span class="linenos">53</span>    <span class="n">conf</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">iou</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">imgsz</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
 <span class="linenos">54</span><span class="p">)</span>
 <span class="linenos">55</span>
@@ -500,8 +500,8 @@
 </pre></div>
 </div>
 </section>
-<section id="springer-from-scopus-export-scopus-springer-detection-azure-dataset">
-<h2>Springer from Scopus Export (Scopus → Springer → Detection → Azure → Dataset)<a class="headerlink" href="#springer-from-scopus-export-scopus-springer-detection-azure-dataset" title="Link to this heading">¶</a></h2>
+<section id="springer-from-scopus-export-scopus-springer">
+<h2>Springer from Scopus Export (Scopus → Springer)<a class="headerlink" href="#springer-from-scopus-export-scopus-springer" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">matmmextract.preprocess</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 <span class="linenos"> 2</span>    <span class="n">load_csvs</span><span class="p">,</span>
 <span class="linenos"> 3</span>    <span class="n">drop_duplicate_dois</span><span class="p">,</span>
@@ -615,10 +615,10 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Examples</a><ul>
-<li><a class="reference internal" href="#elsevier-full-pipeline-openalex-elsevier-detection-azure-dataset">Elsevier Full Pipeline (OpenAlex → Elsevier → Detection → Azure → Dataset)</a></li>
-<li><a class="reference internal" href="#elsevier-from-scopus-export-scopus-elsevier-detection-azure-dataset">Elsevier from Scopus Export (Scopus → Elsevier → Detection → Azure → Dataset)</a></li>
-<li><a class="reference internal" href="#springer-full-pipeline-openalex-springer-detection-gemini-dataset">Springer Full Pipeline (OpenAlex → Springer → Detection → Gemini → Dataset)</a></li>
-<li><a class="reference internal" href="#springer-from-scopus-export-scopus-springer-detection-azure-dataset">Springer from Scopus Export (Scopus → Springer → Detection → Azure → Dataset)</a></li>
+<li><a class="reference internal" href="#elsevier-full-pipeline-openalex-elsevier-detection-model-checkpoint-from-google-drive-azure-dataset">Elsevier Full Pipeline (OpenAlex → Elsevier → Detection (model checkpoint from Google Drive) → Azure → Dataset)</a></li>
+<li><a class="reference internal" href="#elsevier-from-scopus-export-scopus-elsevier">Elsevier from Scopus Export (Scopus → Elsevier)</a></li>
+<li><a class="reference internal" href="#springer-full-pipeline-openalex-springer-detection-model-checkpoint-from-hugging-face-hub-gemini-dataset">Springer Full Pipeline (OpenAlex → Springer → Detection (model checkpoint from Hugging Face Hub) → Gemini → Dataset)</a></li>
+<li><a class="reference internal" href="#springer-from-scopus-export-scopus-springer">Springer from Scopus Export (Scopus → Springer)</a></li>
 <li><a class="reference internal" href="#cleanup-intermediate-files">Cleanup Intermediate Files</a></li>
 </ul>
 </li>

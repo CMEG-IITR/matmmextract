@@ -316,8 +316,11 @@
 <li><p><strong>output_dir</strong> – Directory where one <code class="docutils literal notranslate"><span class="pre">.json</span></code> per image is written, plus
 <code class="docutils literal notranslate"><span class="pre">_summary.json</span></code> containing all records combined.</p></li>
 <li><p><strong>checkpoint</strong> – Path to a YOLO <code class="docutils literal notranslate"><span class="pre">.pt</span></code> file, a directory containing
-<code class="docutils literal notranslate"><span class="pre">best.pt</span></code> / <code class="docutils literal notranslate"><span class="pre">last.pt</span></code>, or a Google Drive share URL
-(e.g. <code class="docutils literal notranslate"><span class="pre">https://drive.google.com/file/d/&lt;ID&gt;/view</span></code>).</p></li>
+<code class="docutils literal notranslate"><span class="pre">best.pt</span></code> / <code class="docutils literal notranslate"><span class="pre">last.pt</span></code>, a Google Drive share URL
+(e.g. <code class="docutils literal notranslate"><span class="pre">https://drive.google.com/file/d/&lt;ID&gt;/view</span></code>), or a
+Hugging Face Hub reference — a full URL
+(<code class="docutils literal notranslate"><span class="pre">https://huggingface.co/&lt;user&gt;/&lt;repo&gt;/resolve/main/best.pt</span></code>)
+or a bare repo ID (<code class="docutils literal notranslate"><span class="pre">&quot;&lt;user&gt;/&lt;repo&gt;&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;&lt;user&gt;/&lt;repo&gt;:best.pt&quot;</span></code>).</p></li>
 <li><p><strong>weights_cache_dir</strong> – Local directory to cache downloaded weights (default <code class="docutils literal notranslate"><span class="pre">.weights_cache</span></code>).</p></li>
 <li><p><strong>conf</strong> – Confidence threshold (default 0.6).</p></li>
 <li><p><strong>iou</strong> – NMS IoU threshold (default 0.4).</p></li>

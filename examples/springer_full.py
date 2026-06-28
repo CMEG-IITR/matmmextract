@@ -49,7 +49,7 @@ springer_download(
 detect(
     image_dir="images/springer",
     output_dir="inference_results",
-    checkpoint="https://drive.google.com/file/d/10garsNWEdgzMGX9nyDE8dMABkU_3BYp9/view?usp=sharing",
+    checkpoint="https://huggingface.co/CMEG-IITR/yolo12_unique_multimat",
     conf=0.6, iou=0.4, imgsz=1024,
 )
 

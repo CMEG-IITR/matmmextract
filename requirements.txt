@@ -15,3 +15,4 @@ openai>=2.41
 
 numpy>=2.4
 gdown>=6.1
+huggingface_hub>=1.18
