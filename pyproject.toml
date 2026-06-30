@@ -38,8 +38,8 @@ dependencies = [
 
 [project.optional-dependencies]
 docs = [
-    "sphinx",
-    "sphinx-rtd-theme",
+    "furo>=2024.8.6",
+    "sphinx>=8.0.0",
 ]
 
 [tool.setuptools]
