@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.svg" alt="MatMMExtract Logo" width="220">
+  <img src="https://raw.githubusercontent.com/CMEG-IITR/matmmextract/release/logo.svg" alt="MatMMExtract Logo" width="220">
 </p>
 
 # MatmmExtract

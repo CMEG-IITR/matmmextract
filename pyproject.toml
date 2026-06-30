@@ -42,6 +42,10 @@ docs = [
     "sphinx>=8.0.0",
 ]
 
+[project.urls]
+Homepage = "https://github.com/CMEG-IITR/matmmextract"
+Documentation = "https://matmmextract.readthedocs.io/en/latest/"
+
 [tool.setuptools]
 package-dir = {"" = "src"}
 
