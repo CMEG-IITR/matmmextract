@@ -3,7 +3,7 @@ import sys
 
 sys.path.insert(0, os.path.abspath("../src"))
 
-project = "MultiMat"
+project = "MatMMExtract"
 author = "Shubham Ghosh, Abhishek Tewari and Mohammad Ibrahim"
 release = "0.1.0"
 
@@ -23,7 +23,7 @@ templates_path = ["_templates"]
 exclude_patterns = ["_build"]
 
 html_theme = "furo"
-html_title = "MultiMat"
+html_title = "MatMMExtract"
 
 html_show_sourcelink = False
 
