@@ -282,8 +282,7 @@ docs/_build/index.html
 If you use MatmmExtract in academic work, please cite:
 
 ```text
-MatmmExtract: A Pipeline for Constructing Multimodal Materials-Science Datasets
-from Scientific Literature.
+
 ```
 
 ---
