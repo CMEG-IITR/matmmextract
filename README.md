@@ -2,6 +2,15 @@
   <img src="https://raw.githubusercontent.com/CMEG-IITR/matmmextract/release/logo.svg" alt="MatMMExtract Logo" width="220">
 </p>
 
+<p align="center">
+  <a href="https://pypi.org/project/matmmextract/" style="margin-right:40px;">
+    <img src="https://img.shields.io/badge/PyPI-matmmextract-blue?logo=pypi&logoColor=white" alt="PyPI">
+  </a>
+  <a href="https://matmmextract.readthedocs.io/en/latest/">
+    <img src="https://img.shields.io/badge/Docs-Read%20the%20Docs-8CA1AF?logo=readthedocs&logoColor=white" alt="Documentation">
+  </a>
+</p>
+
 # MatmmExtract
 
 **MatmmExtract** is an end-to-end pipeline for building multimodal materials-science datasets from scientific literature.
@@ -274,6 +283,8 @@ Generated documentation:
 ```text
 docs/_build/index.html
 ```
+
+Also at [readthedocs.io](https://matmmextract.readthedocs.io/en/latest/).
 
 ---
 
