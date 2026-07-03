@@ -11,6 +11,7 @@
       OpenAlex,
       Elsevier,
       Springer
+      matmmextract
 
 Getting Started
 ===============

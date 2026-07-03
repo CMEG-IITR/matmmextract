@@ -16,6 +16,7 @@
       computer vision,
       machine learning,
       scientific literature
+      matmmextract
 
 .. image:: ../logo.svg
    :align: center
