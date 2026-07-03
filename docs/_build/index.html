@@ -3,11 +3,11 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Examples" href="examples.html"><link rel="prev" title="MultiMat" href="index.html">
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Getting Started" href="getting_started.html">
         <link rel="prefetch" href="_static/logo.svg" as="image">
 
     <link rel="shortcut icon" href="_static/favicon.png"><!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>Getting Started - MatMMExtract</title>
+        <title>MatMMExtract</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
@@ -162,7 +162,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">MatMMExtract</div></a>
+      <a href="#"><div class="brand">MatMMExtract</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -173,7 +173,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
@@ -181,7 +181,7 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
   <div class="sidebar-logo-container">
     <img class="sidebar-logo" src="_static/logo.svg" alt="Logo"/>
   </div>
@@ -194,8 +194,8 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul class="current">
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Getting Started</a></li>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="api.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="openalex/fetch.html">OpenAlex Fetch</a></li>
@@ -248,25 +248,43 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="getting-started">
-<h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">¶</a></h1>
-<section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
-</pre></div>
+          <a class="reference internal image-reference" href="_images/logo.svg"><img alt="_images/logo.svg" class="align-center" src="_images/logo.svg" style="width: 220px;" />
+</a>
+<section id="matmmextract">
+<h1>MatMMExtract<a class="headerlink" href="#matmmextract" title="Link to this heading">¶</a></h1>
+<p>Scientific paper acquisition, extraction, preprocessing,
+dataset creation, detection and caption generation.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#build-docs">Build docs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#elsevier-full-pipeline-openalex-elsevier-detection-azure-dataset">Elsevier Full Pipeline (OpenAlex → Elsevier → Detection → Azure → Dataset)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#elsevier-from-scopus-export-scopus-elsevier">Elsevier from Scopus Export (Scopus → Elsevier)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#springer-full-pipeline-openalex-springer-detection-model-checkpoint-from-hugging-face-hub-gemini-dataset">Springer Full Pipeline (OpenAlex → Springer → Detection (model checkpoint from Hugging Face Hub) → Gemini → Dataset)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#springer-from-scopus-export-scopus-springer">Springer from Scopus Export (Scopus → Springer)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#cleanup-intermediate-files">Cleanup Intermediate Files</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#openalex">OpenAlex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#elsevier">Elsevier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#springer">Springer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#inference">Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#preprocess">Preprocess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#shared">Shared</a></li>
+</ul>
+</li>
+</ul>
 </div>
-</section>
-<section id="build-docs">
-<h2>Build docs<a class="headerlink" href="#build-docs" title="Link to this heading">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sphinx-build<span class="w"> </span>-b<span class="w"> </span>html<span class="w"> </span>docs<span class="w"> </span>docs/_build
-</pre></div>
-</div>
-</section>
 </section>
 
         </article>
@@ -274,26 +292,16 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="examples.html">
+          <a class="next-page" href="getting_started.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Examples</div>
+                <div class="title">Getting Started</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="index.html">
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">Home</div>
-                
-              </div>
-            </a>
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -312,28 +320,8 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">Getting Started</a><ul>
-<li><a class="reference internal" href="#installation">Installation</a></li>
-<li><a class="reference internal" href="#build-docs">Build docs</a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>

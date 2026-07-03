@@ -1,7 +1,7 @@
 Examples
 ========
 
-Elsevier Full Pipeline (OpenAlex → Elsevier → Detection (model checkpoint from Google Drive) → Azure → Dataset)
+Elsevier Full Pipeline (OpenAlex → Elsevier → Detection → Azure → Dataset)
 ---------------------------------------------------------------------------------------------------------------
 
 .. literalinclude:: ../examples/elsevier_full.py

@@ -2,8 +2,8 @@
    :align: center
    :width: 220px
 
-MultiMat
-========
+MatMMExtract
+============
 
 Scientific paper acquisition, extraction, preprocessing,
 dataset creation, detection and caption generation.
