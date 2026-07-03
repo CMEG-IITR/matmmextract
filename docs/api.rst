@@ -1,3 +1,13 @@
+.. meta::
+   :description lang=en:
+      API reference for the MatMMExtract Python package.
+
+   :keywords:
+      API,
+      Python package,
+      documentation,
+      MatMMExtract
+
 API Reference
 =============
 

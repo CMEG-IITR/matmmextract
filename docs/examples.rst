@@ -1,3 +1,14 @@
+.. meta::
+   :description lang=en:
+      Complete examples demonstrating OpenAlex, Elsevier, Springer,
+      Scopus, panel detection, caption generation, and dataset construction.
+
+   :keywords:
+      examples,
+      tutorial,
+      materials science,
+      multimodal dataset
+
 Examples
 ========
 

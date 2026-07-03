@@ -1,3 +1,17 @@
+.. meta::
+   :description lang=en:
+      Learn how to install MatMMExtract, retrieve scientific papers,
+      extract figures, detect panels, generate captions, and build
+      multimodal datasets.
+
+   :keywords:
+      MatMMExtract installation,
+      getting started,
+      Python,
+      OpenAlex,
+      Elsevier,
+      Springer
+
 Getting Started
 ===============
 

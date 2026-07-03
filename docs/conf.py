@@ -32,6 +32,14 @@ html_theme_options = {
     "top_of_page_button": "edit",
 }
 
+html_context = {
+    "description": (
+        "MatMMExtract is an open-source Python library for extracting "
+        "scientific figures, captions, and multimodal datasets from "
+        "materials science literature."
+    ),
+}
+
 html_show_sourcelink = False
 
 autodoc_default_options = {

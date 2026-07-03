@@ -1,3 +1,22 @@
+.. meta::
+   :description lang=en:
+      MatMMExtract is an open-source Python library for building multimodal
+      materials science datasets from scientific literature using OpenAlex,
+      Elsevier, Springer, figure extraction, panel detection, and LLM captioning.
+
+   :keywords:
+      materials science,
+      multimodal datasets,
+      scientific figure extraction,
+      OpenAlex,
+      Elsevier,
+      Springer,
+      Gemini,
+      Azure OpenAI,
+      computer vision,
+      machine learning,
+      scientific literature
+
 .. image:: ../logo.svg
    :align: center
    :width: 220px
