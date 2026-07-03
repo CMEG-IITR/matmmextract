@@ -5,11 +5,31 @@
 MatMMExtract
 ============
 
-Scientific paper acquisition, extraction, preprocessing,
-dataset creation, detection and caption generation.
+**MatMMExtract** is an open-source Python library for building multimodal
+materials science datasets from scientific literature.
+
+It provides an end-to-end pipeline for retrieving papers from OpenAlex,
+Elsevier, Springer, and Scopus, extracting figures and captions, detecting
+scientific figure panels, generating fine-grained captions using modern
+large language models (LLMs), and constructing machine-learning-ready
+multimodal datasets.
+
+Key Features
+------------
+
+* OpenAlex and Scopus paper retrieval
+* Elsevier and Springer XML parsing
+* Figure and caption extraction
+* Scientific figure panel detection
+* Google Gemini and Azure OpenAI caption generation
+* Dataset construction for multimodal machine learning
+
+Contents
+--------
 
 .. toctree::
    :maxdepth: 2
+   :caption: Documentation
 
    getting_started
    examples

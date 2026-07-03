@@ -5,7 +5,10 @@ sys.path.insert(0, os.path.abspath("../src"))
 
 project = "MatMMExtract"
 author = "Shubham Ghosh, Abhishek Tewari and Mohammad Ibrahim"
-release = "0.1.0"
+project = "MatMMExtract"
+
+release = "0.1.2"
+version = release
 
 extensions = [
     "sphinx.ext.autodoc",
@@ -23,7 +26,11 @@ templates_path = ["_templates"]
 exclude_patterns = ["_build"]
 
 html_theme = "furo"
-html_title = "MatMMExtract"
+html_title = "MatMMExtract Documentation"
+
+html_theme_options = {
+    "top_of_page_button": "edit",
+}
 
 html_show_sourcelink = False
 
