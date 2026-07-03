@@ -284,7 +284,13 @@ If you use MatmmExtract in academic work, please cite:
 ```text
 
 ```
-
+@article{ghosh2026unlocking,
+  title={Unlocking the Visual Record of Materials Science: A Large-Scale Multimodal Dataset from Scientific Literature},
+  author={Ghosh, Subham and Tiwari, Shubham and Ibrahim, Mohammad and Tewari, Abhishek},
+  journal={arXiv preprint arXiv:2606.29667},
+  year={2026},
+  doi={https://doi.org/10.48550/arXiv.2606.29667}
+}
 ---
 
 ## License
@@ -292,13 +298,3 @@ If you use MatmmExtract in academic work, please cite:
 GNU General Public License v3.0 (GPL-3.0).
 
 See the LICENSE file for details.
-
----
-
-## Authors
-
-- Subham Ghosh
-
-- Abhishek Tewari
-
-- Mohammad Ibrahim
